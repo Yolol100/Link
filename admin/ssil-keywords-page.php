@@ -39,7 +39,7 @@ function ssil_keywords_page() {
                     if(suggestWrap) suggestWrap.style.display = 'none';
                     var suggestBtn = document.querySelector('.yoast-btn-suggest');
                     if(suggestBtn) suggestBtn.style.display = 'inline-block';
-                    // Verwijder URL-param zodat suggesties bij refresh weg zijn
+                    // Optioneel: URL-param verwijderen
                     if(window.history.replaceState) {
                         var url = new URL(window.location.href);
                         url.searchParams.delete('ssil_action');
@@ -84,7 +84,7 @@ function ssil_keywords_page() {
                 <?php
                 $links = get_option('ssil_links', []);
 
-                // Zoekfilter
+                // Filter links op zoekterm, indien aanwezig
                 if (!empty($_GET['ssil_search'])) {
                     $search = strtolower(sanitize_text_field($_GET['ssil_search']));
                     $links = array_filter($links, function($k) use ($search) {
@@ -140,4 +140,3 @@ function ssil_keywords_page() {
     </div>
     <?php
 }
-?>

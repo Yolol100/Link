@@ -1,11 +1,20 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // ===== Keyword suggestie & auto-URL invullen =====
+
+    // ========== Toast functionaliteit ==========
+    function showToast(message, type = 'success') {
+        const toast = document.createElement('div');
+        toast.className = 'ssil-toast ssil-toast-' + type;
+        toast.innerText = message;
+        document.body.appendChild(toast);
+        setTimeout(() => { toast.remove(); }, 3000);
+    }
+
+    // ========== Keyword suggestie & auto-URL invullen ==========
     const keywordInput = document.querySelector('input[name="new_word"]');
     const urlInput = document.querySelector('input[name="new_url"]');
     const submitBtn = document.querySelector('.ssil-submit-btn, .ssil-btn-primary');
 
     let timeout = null;
-    let loading = false;
 
     if (keywordInput && urlInput) {
         keywordInput.addEventListener('input', function() {
@@ -24,7 +33,6 @@ document.addEventListener('DOMContentLoaded', function() {
             urlInput.classList.add('ssil-loading');
 
             timeout = setTimeout(() => {
-                loading = true;
                 fetch(ajaxurl + '?action=ssil_suggest_url&keyword=' + encodeURIComponent(query), {
                     credentials: 'same-origin'
                 })
@@ -32,31 +40,65 @@ document.addEventListener('DOMContentLoaded', function() {
                 .then(data => {
                     if (data && data.url) {
                         urlInput.value = data.url;
+                        removeInlineError(urlInput);
                     } else {
                         urlInput.value = '';
+                        showInlineError(urlInput, 'Geen suggestie gevonden.');
                     }
                 })
                 .catch(() => {
                     urlInput.value = '';
+                    showInlineError(urlInput, 'Fout bij ophalen suggestie.');
                 })
                 .finally(() => {
                     urlInput.classList.remove('ssil-loading');
-                    loading = false;
                 });
             }, 450);
         });
 
-        // Zet submitbutton uit als keyword of url leeg is
+        // Zet submitbutton uit als keyword of url leeg is + inline URL validatie
         [keywordInput, urlInput].forEach(inp => {
             inp.addEventListener('input', function() {
                 if (submitBtn) submitBtn.disabled = !keywordInput.value.trim() || !urlInput.value.trim();
+                if (inp === urlInput) validateUrl(urlInput);
             });
         });
+
         // Init state
         if (submitBtn) submitBtn.disabled = !keywordInput.value.trim() || !urlInput.value.trim();
     }
 
-    // ===== Highlight bij hover in logs-tabel =====
+    // ========== Inline URL validatie ==========
+    function validateUrl(input) {
+        const urlPattern = /^https?:\/\/.+/;
+        if (!input.value.trim()) {
+            removeInlineError(input);
+            input.classList.remove('ssil-error');
+            return;
+        }
+        if (!urlPattern.test(input.value)) {
+            input.classList.add('ssil-error');
+            showInlineError(input, 'Geen geldige URL.');
+        } else {
+            input.classList.remove('ssil-error');
+            removeInlineError(input);
+        }
+    }
+    function showInlineError(input, msg) {
+        let error = input.parentNode.querySelector('.ssil-inline-error');
+        if (!error) {
+            error = document.createElement('div');
+            error.className = 'ssil-inline-error';
+            input.parentNode.appendChild(error);
+        }
+        error.innerText = msg;
+    }
+    function removeInlineError(input) {
+        let error = input.parentNode.querySelector('.ssil-inline-error');
+        if (error) error.remove();
+    }
+
+    // ========== Highlight bij hover in logs-tabel ==========
     const table = document.getElementById('ssil-logs-table');
     if (table) {
         table.addEventListener('mouseover', function(e) {
@@ -69,7 +111,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // ===== Rapportage tabel kopiëren =====
+    // ========== Rapportage tabel kopiëren ==========
     const copyBtn = document.getElementById('ssil-copy-report');
     if (copyBtn) {
         copyBtn.addEventListener('click', function() {
@@ -81,12 +123,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 txt += vals.join('\t') + "\n";
             }
             navigator.clipboard.writeText(txt).then(() => {
-                alert('Rapportage gekopieerd!');
+                showToast('Rapportage gekopieerd!', 'success');
+            }).catch(() => {
+                showToast('Kopiëren mislukt.', 'error');
             });
         });
     }
 
-    // ===== Suggesties toggle + sluiten =====
+    // ========== Suggesties toggle + sluiten ==========
     const toggle = document.getElementById('ssil-suggest-toggle');
     const suggestWrap = document.getElementById('ssil-suggest-wrap');
     const closeBtn = document.getElementById('ssil-suggest-close');
@@ -112,4 +156,5 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
+
 });

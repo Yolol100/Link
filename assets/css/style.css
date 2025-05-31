@@ -1,590 +1,691 @@
 :root {
-    --ssil-primary-light: #f8faff;
-    --ssil-danger: #dc2626;
-    --ssil-danger-bg: #fee2e2;
-    --ssil-danger-dark: #b91c1c;
-    --ssil-bg: #f8faff;
-    --ssil-text: #1e293b;
-    --ssil-white: #fff;
-    --ssil-radius: 14px;
-    --ssil-blue: #2563eb;
-    --ssil-blue-dark: #1743a2;
-    --ssil-gray: #64748b;
-    --ssil-gray-light: #e5eaf4;
-    --ssil-green: #22c55e;
+  --yoast-main-color: #A4286A;
+  --yoast-main-dark: #7C2256;
+  --yoast-success: #77B227;
+  --yoast-warning: #FFD24D;
+  --yoast-error: #D62828;
+  --yoast-bg-light: #F3F4F6;
+  --yoast-text-main: #111827;
+  --yoast-text-muted: #6B7280;
+  --yoast-bg-white: #fff;
+  --yoast-border: #E5E7EB;
+  --yoast-border-radius: 4px;
+  --yoast-shadow: 0 2px 12px 0 rgba(164,40,106,0.10), 0 1.5px 4px rgba(0,0,0,0.07);
+  --yoast-spacing: 1rem;
+  --yoast-font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --yoast-transition: 0.15s cubic-bezier(.4,0,.2,1);
+  --yoast-badge-size: 0.97em;
 }
 
-/* Wrapper */
-.ssil-wrap {
-    background: var(--ssil-white) !important;
-    border-radius: var(--ssil-radius) !important;
-    padding: 2.7rem 3rem !important;
-    margin: 2.2rem auto 2rem auto !important;
-    max-width: 900px !important;
-    font-family: 'Inter', 'Roboto', 'Segoe UI', Arial, sans-serif !important;
-    color: var(--ssil-text) !important;
-    box-shadow: 0 6px 32px 0 #e8eef7 !important;
+/* GLOBAL RESET */
+body, .yoast-card, .yoast-modal {
+  font-family: var(--yoast-font-family) !important;
+  color: var(--yoast-text-main) !important;
+  background: var(--yoast-bg-light);
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+/* LAYOUT + CARD */
+.yoast-card {
+  background: var(--yoast-bg-white) !important;
+  border: 1px solid var(--yoast-border) !important;
+  border-radius: var(--yoast-border-radius) !important;
+  box-shadow: var(--yoast-shadow) !important;
+  padding: 28px 36px !important;
+  margin-bottom: 32px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  margin-top: 32px !important;
+  max-width: 1024px;
+  transition: box-shadow var(--yoast-transition), border-color var(--yoast-transition);
+  position: relative;
+}
+@media (max-width: 800px) {
+  .yoast-card { padding: 16px 5px !important; }
+}
+
+/* UTILITY CLASSES */
+.yoast-mb-0 { margin-bottom: 0 !important; }
+.yoast-mb-2 { margin-bottom: .5rem !important; }
+.yoast-mb-4 { margin-bottom: 1rem !important; }
+.yoast-mt-2 { margin-top: .5rem !important; }
+.yoast-mt-4 { margin-top: 1rem !important; }
+.yoast-mr-2 { margin-right: .5rem !important; }
+.yoast-p-2 { padding: .5rem !important; }
+.yoast-p-4 { padding: 1rem !important; }
+.yoast-gap-2 { gap: .5rem !important; }
+.yoast-gap-4 { gap: 1.25rem !important; }
+.yoast-text-lg { font-size: 1.15rem !important; }
+.yoast-font-bold { font-weight: 700 !important; }
+.yoast-text-muted { color: var(--yoast-text-muted) !important; }
+.yoast-link { color: var(--yoast-main-color) !important; text-decoration: underline !important; }
+.yoast-link:hover { color: var(--yoast-main-dark) !important; }
+
+.yoast-flex { display: flex !important; }
+.yoast-justify-between { justify-content: space-between !important; }
+.yoast-justify-end { justify-content: flex-end !important; }
+.yoast-align-center { align-items: center !important; }
+.yoast-w-full { width: 100% !important; }
+.yoast-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+.yoast-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.2rem; }
+
+/* TABS */
+.yoast-tabs {
+  display: flex;
+  gap: 0;
+  background: var(--yoast-bg-light) !important;
+  border-radius: 4px 4px 0 0 !important;
+  min-height: 48px !important;
+  border-bottom: 1px solid var(--yoast-border) !important;
+  margin-bottom: 24px !important;
+  padding-left: .7rem !important;
+}
+.yoast-tab {
+  font-size: 1em;
+  font-weight: 600;
+  padding: 0.9rem 2.1rem 0.9rem 1.2rem;
+  border-radius: 4px 4px 0 0 !important;
+  border: none;
+  background: none;
+  color: var(--yoast-text-muted);
+  margin-right: 3px;
+  outline: none;
+  transition: color 0.15s, background 0.13s;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  text-decoration: none;
+  position: relative;
+}
+.yoast-tab:focus-visible { outline: 2px solid var(--yoast-main-color); }
+.yoast-tab:hover,
+.yoast-tab:focus {
+  background: var(--yoast-bg-white);
+  color: var(--yoast-main-color);
+}
+.yoast-tab-active {
+  background: var(--yoast-bg-white) !important;
+  color: var(--yoast-main-color) !important;
+  border-bottom: 3px solid var(--yoast-main-color) !important;
+  z-index: 2;
+}
+
+/* FORM LABELS */
+.yoast-label {
+  font-weight: 600;
+  font-size: 1em;
+  color: var(--yoast-text-main);
+}
+
+/* KEYWORDS ROW */
+.yoast-keywords-row {
+  display: flex !important;
+  flex-wrap: wrap;
+  gap: 2.6rem !important;
+  align-items: center !important;
+  margin-bottom: 1.1rem !important;
+}
+.yoast-keywords-row > .yoast-input,
+.yoast-keywords-row > input[type="text"],
+.yoast-keywords-row > input[type="url"],
+.yoast-keywords-row > input[type="number"],
+.yoast-keywords-row > select,
+.yoast-keywords-row > textarea,
+.yoast-keywords-row > .yoast-button-primary {
+  height: 44px !important;
+  min-height: 44px !important;
+  box-sizing: border-box !important;
+  vertical-align: middle !important;
+  margin-bottom: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+.yoast-keywords-row > .yoast-button-primary {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+.yoast-keywords-row label {
+  height: 44px !important;
+  display: flex !important;
+  align-items: center !important;
+  margin-bottom: 0 !important;
+  gap: 6px !important;
+  font-size: 1em;
+  color: var(--yoast-text-muted);
+  font-weight: 500;
+}
+
+/* INPUTS & BUTTONS */
+.yoast-input,
+input[type="text"].yoast-input,
+input[type="number"].yoast-input,
+input[type="url"].yoast-input,
+select.yoast-input,
+textarea.yoast-input {
+  min-height: 44px !important;
+  height: 44px !important;
+  line-height: 1.3;
+  border: 1.5px solid var(--yoast-border) !important;
+  border-radius: var(--yoast-border-radius) !important;
+  background: var(--yoast-bg-light) !important;
+  color: var(--yoast-text-main) !important;
+  padding: 10px 14px !important;
+  font-size: 1em !important;
+  margin-bottom: 2px !important;
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color 0.18s, background 0.13s;
+  display: block;
+}
+.yoast-input:focus,
+input[type="text"].yoast-input:focus,
+input[type="number"].yoast-input:focus,
+input[type="url"].yoast-input:focus,
+select.yoast-input:focus,
+textarea.yoast-input:focus {
+  border-color: var(--yoast-main-color) !important;
+  background: #f8f3f8 !important;
+  box-shadow: 0 0 0 2px rgba(164,40,106,0.1);
+}
+.yoast-input[type="file"] {
+  min-height: 44px !important;
+  height: 44px !important;
+  padding-top: 8px !important;
+  padding-bottom: 8px !important;
+}
+.yoast-input-csv { max-width: 320px !important; }
+.yoast-input-priority,
+input[type="number"].yoast-input-priority {
+  max-width: 80px !important;
+  width: 80px !important;
+}
+
+.yoast-checkbox {
+  accent-color: var(--yoast-main-color) !important;
+  width: 18px !important;
+  height: 18px !important;
+  border-radius: 4px !important;
+  margin-right: 4px !important;
+}
+.yoast-checkbox-label {
+  font-size: 1em;
+  color: var(--yoast-text-muted) !important;
+  font-weight: 500;
+  margin-right: 12px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+}
+.yoast-button-primary {
+  background: var(--yoast-main-color) !important;
+  color: #fff !important;
+  border-radius: var(--yoast-border-radius) !important;
+  padding: 0px 28px !important;
+  font-weight: 600 !important;
+  border: none !important;
+  cursor: pointer !important;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.07);
+  transition: background 0.16s, box-shadow 0.13s, transform 0.11s;
+  font-size: 1em;
+  min-height: 44px !important;
+  height: 44px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  letter-spacing: 0.04em;
+  text-decoration: none !important;
+  position: relative;
+}
+.yoast-button-primary:focus-visible { outline: 2px solid var(--yoast-main-color); }
+.yoast-button-primary:hover,
+.yoast-button-primary:focus {
+  background: var(--yoast-main-dark) !important;
+  transform: translateY(-1px) scale(1.03);
+  outline: none;
+}
+
+.ssil-btn-spinner {
+  display: none;
+  vertical-align: middle;
+  margin-left: 8px;
+}
+
+.yoast-btn-delete {
+  background: #fff !important;
+  color: var(--yoast-error) !important;
+  border: 1.5px solid var(--yoast-error) !important;
+  border-radius: var(--yoast-border-radius) !important;
+  font-weight: 600 !important;
+  padding: 7px 18px !important;
+  cursor: pointer !important;
+  font-size: 1em !important;
+  min-height: 44px !important;
+  height: 44px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  transition: background 0.14s, color 0.13s, border-color 0.13s;
+}
+.yoast-btn-delete:hover,
+.yoast-btn-delete:focus {
+  background: #FFF5F5 !important;
+  color: #b91c1c !important;
+  border-color: #b91c1c !important;
+}
+
+/* SUGGESTIE BALK & METABOX ZOEKVELD */
+#ssil-meta-suggestions,
+.yoast-meta-suggestions {
+  max-height: 200px;
+  overflow-y: auto;
+}
+#ssil-meta-keyword,
+.yoast-metabox-input {
+  width: 100% !important;
+  min-height: 44px !important;
+  height: 44px !important;
+  font-size: 1em !important;
+  padding: 9px 13px !important;
+  border: 1.4px solid var(--yoast-border) !important;
+  border-radius: var(--yoast-border-radius) !important;
+  background: var(--yoast-bg-light) !important;
+  color: var(--yoast-text-main) !important;
+  box-sizing: border-box !important;
+  margin-bottom: 8px !important;
+  outline: none !important;
+  transition: border-color 0.16s, background 0.12s !important;
+  display: block;
+}
+#ssil-meta-keyword:focus,
+.yoast-metabox-input:focus {
+  border-color: var(--yoast-main-color) !important;
+  background: #f8f3f8 !important;
+}
+#ssil-meta-suggestions a,
+.yoast-meta-suggestion-link {
+  color: var(--yoast-main-color) !important;
+  word-break: break-all !important;
+  text-decoration: underline !important;
+  font-size: 0.98em !important;
+}
+#ssil-meta-suggestions a:hover,
+.yoast-meta-suggestion-link:hover {
+  color: var(--yoast-main-dark) !important;
+}
+#ssil-meta-suggestions em {
+  color: #888 !important;
+  font-size: 0.97em !important;
+}
+
+/* TABLES */
+.yoast-table {
+  width: 100% !important;
+  border-collapse: separate !important;
+  background: var(--yoast-bg-white) !important;
+  box-shadow: none !important;
+  margin-top: 12px !important;
+  margin-bottom: 28px !important;
+  font-size: 1em !important;
+}
+.yoast-table th,
+.yoast-table.widefat th {
+  background: var(--yoast-bg-light) !important;
+  color: var(--yoast-text-main) !important;
+  font-weight: 700 !important;
+  border: none !important;
+  padding: 1rem 1.1rem 0.7rem 1.1rem !important;
+  font-size: 1em !important;
+  text-align: left !important;
+  vertical-align: middle !important;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+.yoast-table tbody tr:nth-child(even) {
+  background: #faf5fb !important;
+}
+.yoast-table td,
+.yoast-table.widefat td {
+  padding: 1rem 1.1rem !important;
+  background: var(--yoast-bg-white) !important;
+  border: none !important;
+  font-size: 1em !important;
+  color: var(--yoast-text-main) !important;
+  vertical-align: middle !important;
+  word-break: break-all !important;
+  transition: background 0.12s;
+}
+.yoast-table tr,
+.yoast-table.widefat tr {
+  background: none !important;
+  box-shadow: none !important;
+}
+.yoast-table tbody tr:hover {
+  background: #f8f3f8 !important;
+}
+@media (max-width: 600px) {
+  .yoast-table th,
+  .yoast-table td {
+    padding: 0.7em 0.3em !important;
+    font-size: 0.99em !important;
+  }
+}
+
+/* ALERTS */
+.yoast-alert-success {
+  border-left: 4px solid var(--yoast-success) !important;
+  background: #F7FBF6 !important;
+  color: var(--yoast-text-main) !important;
+  padding: 14px 22px !important;
+  border-radius: var(--yoast-border-radius) !important;
+  margin-bottom: 22px !important;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+}
+.yoast-alert-error {
+  border-left: 4px solid var(--yoast-error) !important;
+  background: #FFF5F5 !important;
+  color: var(--yoast-text-main) !important;
+  padding: 14px 22px !important;
+  border-radius: var(--yoast-border-radius) !important;
+  margin-bottom: 22px !important;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+}
+
+/* BADGES */
+.yoast-badge {
+  display: inline-block;
+  background: var(--yoast-main-color) !important;
+  color: #fff !important;
+  border-radius: 12px !important;
+  padding: 3px 10px !important;
+  font-size: var(--yoast-badge-size) !important;
+  font-weight: 600 !important;
+  margin-left: 6px !important;
+  margin-right: 3px !important;
+  vertical-align: middle !important;
+  letter-spacing: 0.03em !important;
+}
+.yoast-badge-error {
+  background: var(--yoast-error) !important;
+}
+.yoast-badge-success {
+  background: var(--yoast-success) !important;
+}
+.yoast-badge-warning {
+  background: var(--yoast-warning) !important;
+  color: #533400 !important;
+}
+.yoast-badge-info {
+  background: #6B7280 !important;
+}
+
+.yoast-quality-list {
+  color: var(--yoast-text-main);
+  font-size: 1em;
+}
+
+/* ONBOARDING/BANNER/AI-MESSAGE */
+.yoast-banner {
+  border-radius: var(--yoast-border-radius) !important;
+  box-shadow: var(--yoast-shadow);
+  padding: 20px 26px !important;
+  background: linear-gradient(90deg, #a4286a0d 0%, #f3f4f6 100%);
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px !important;
+}
+.yoast-banner .yoast-badge {
+  margin-right: 12px !important;
+  font-size: 1em !important;
+  font-weight: 600 !important;
+}
+
+/* MODAL */
+.yoast-modal {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  background: var(--yoast-bg-white);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.09);
+  border-radius: var(--yoast-border-radius);
+  min-width: 340px;
+  max-width: 98vw;
+  padding: 32px;
+  outline: none;
+  display: none;
+}
+.yoast-modal.open {
+  display: block;
+  animation: yoast-fade-in 0.22s cubic-bezier(.4, 0, .2, 1);
+}
+@keyframes yoast-fade-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -46%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+/* SPINNER & LOADING */
+.yoast-spinner {
+  width: 28px;
+  height: 28px;
+  border: 3px solid #F3F4F6;
+  border-top: 3px solid var(--yoast-main-color);
+  border-radius: 50%;
+  animation: yoast-spin 0.8s linear infinite;
+  margin: 0 auto;
+}
+@keyframes yoast-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.ssil-loading,
+.yoast-input.ssil-loading {
+  background-image: url('data:image/svg+xml;utf8,<svg width="24" height="24" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="25" cy="25" r="20" stroke="%233498db" stroke-width="5" stroke-linecap="round" stroke-dasharray="31.415, 31.415" transform="rotate(72.8796 25 25)"/><animateTransform attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="1s" repeatCount="indefinite"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+}
+
+.ssil-btn-spinner {
+  display: none;
+  vertical-align: middle;
+  margin-left: 8px;
+}
+
+/* INLINE ERROR & VALIDATIE */
+.ssil-inline-error {
+  color: var(--yoast-error);
+  font-size: 13px;
+  margin-top: 4px;
+}
+.ssil-error {
+  border-color: var(--yoast-error) !important;
+}
+
+/* RAPPORTAGE */
+.yoast-report-actions {
+  margin-bottom: 24px !important;
+  display: flex !important;
+  gap: 20px !important;
+  flex-wrap: wrap !important;
+}
+.yoast-btn-copy {}
+
+.yoast-bulk-row {
+  display: flex !important;
+  align-items: flex-end !important;
+  gap: 1.3rem !important;
+  margin-bottom: 24px !important;
+  flex-wrap: wrap !important;
+}
+@media (max-width: 600px) {
+  .yoast-bulk-row {
+    flex-direction: column !important;
+    gap: 12px !important;
+    align-items: stretch !important;
+  }
+}
+.yoast-bulk-form {
+  margin-bottom: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  flex-wrap: wrap !important;
+}
+
+@media (max-width: 600px) {
+  .yoast-input-csv {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+}
+
+.yoast-shadow {
+  box-shadow: var(--yoast-shadow) !important;
+}
+.yoast-rounded {
+  border-radius: var(--yoast-border-radius) !important;
+}
+
+.yoast-focus-visible:focus-visible {
+  outline: 2px solid var(--yoast-main-color) !important;
+}
+
+.yoast-animated-blink {
+  animation: yoast-blink 1.2s infinite steps(2, start);
+}
+@keyframes yoast-blink {
+  to {
+    visibility: hidden;
+  }
+}
+
+.yoast-sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  border: 0 !important;
+}
+
+/* Responsive voor card & keywords-row */
+@media (max-width: 600px) {
+  .yoast-card,
+  .yoast-wrap {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+  .yoast-keywords-row {
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+  .yoast-keywords-row > .yoast-input,
+  .yoast-keywords-row > .yoast-button-primary {
+    width: 100% !important;
+  }
+}
+
+/* SPECIFIEKE AANPASSING VOOR ZOEKFORMULIER OP 1 LIJN */
+.yoast-keywords-searchform {
+  display: flex !important;
+  align-items: center !important;
+  gap: 1rem !important;
+  margin: 0 !important;
+  flex-wrap: nowrap !important;
+}
+.yoast-keywords-searchform .yoast-input,
+.yoast-keywords-searchform .yoast-search-input {
+  height: 44px !important;
+  min-height: 44px !important;
+  margin-bottom: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  box-sizing: border-box !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  flex: 1 1 auto !important;
+  max-width: 400px !important;
+}
+.yoast-keywords-searchform .yoast-button-primary,
+.yoast-keywords-searchform .yoast-btn-search {
+  height: 44px !important;
+  min-height: 44px !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  margin-bottom: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  flex: 0 0 auto !important;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+/* Horizontaal centreren en extra verticale marge voor yoast-card binnen de WordPress admin */
+.yoast-card {
+  margin-left: auto !important;
+  margin-right: auto !important;
+  margin-top: 32px !important;
+  margin-bottom: 32px !important;
+}
+
+/* Toegevoegd: suggestie acties */
+.ssil-suggest-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+}
+.ssil-btn-close-suggest {
+  margin-left: auto;
+}
+@media (max-width: 600px) {
+  .ssil-suggest-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+  }
+  .ssil-btn-close-suggest {
+    margin-left: 0;
+  }
+}
+
+/* Specifiek voor de instellingen-tabel: maak linkerkant breder, rechterkant smaller */
+.yoast-settings-table th[scope="row"],
+.yoast-settings-table .yoast-label {
+  width: 340px;
+  min-width: 250px;
+  max-width: 390px;
+  white-space: normal;
+}
+
+.yoast-settings-table td {
+  width: auto;
+  max-width: 540px;
 }
 
 @media (max-width: 800px) {
-    .ssil-wrap {
-        padding: 1.1rem 0.7rem !important;
-        max-width: 100% !important;
-    }
-}
-
-/* Global margins */
-.ssil-wrap > .button,
-.ssil-wrap > form,
-.ssil-wrap > table,
-.ssil-wrap > .widefat {
-    margin-bottom: 32px !important;
-}
-
-.ssil-wrap .ssil-keywords-form {
-    margin-bottom: 32px !important;
-}
-
-.ssil-wrap .ssil-bulk-form {
-    margin-bottom: 0 !important;
-}
-
-.ssil-wrap .nav-tab-wrapper {
-    margin-bottom: 36px !important;
-}
-
-.ssil-wrap .widefat,
-.ssil-wrap .ssil-table {
-    margin-bottom: 30px !important;
-    margin-top: 0 !important;
-}
-
-.ssil-wrap form + table,
-.ssil-wrap .ssil-keywords-form + table {
-    margin-top: 18px !important;
-}
-
-.ssil-wrap h3,
-.ssil-wrap .ssil-suggest-header {
-    margin-top: 0 !important;
-    margin-bottom: 16px !important;
-}
-
-/* Tabs */
-.ssil-wrap .nav-tab-wrapper {
-    background: var(--ssil-bg) !important;
-    padding-left: 0.6rem !important;
-    border-radius: 13px 13px 0 0 !important;
-    min-height: 52px !important;
-    display: flex !important;
-    gap: 0 !important;
-    border-bottom: none !important;
-}
-.ssil-wrap .nav-tab {
-    font-size: 1.10em !important;
-    font-weight: 600 !important;
-    padding: 1rem 2.1rem 1rem 1.5rem !important;
-    border-radius: 11px 11px 0 0 !important;
-    margin-right: 4px !important;
-    border: none !important;
-    background: none !important;
-    color: var(--ssil-gray) !important;
-    transition: color 0.19s, background 0.15s !important;
-    outline: none !important;
-    letter-spacing: 0.02em !important;
-}
-.ssil-wrap .nav-tab:hover,
-.ssil-wrap .nav-tab:focus {
-    background: var(--ssil-primary-light) !important;
-    color: var(--ssil-blue) !important;
-}
-.ssil-wrap .nav-tab-active {
-    background: var(--ssil-primary-light) !important;
-    color: var(--ssil-text) !important;
-    border-bottom: 3px solid var(--ssil-blue) !important;
-    z-index: 2 !important;
-}
-
-/* Keywords formulier: alle velden en knop even hoog naast elkaar */
-.ssil-keywords-row {
-    display: flex !important;
-    flex-wrap: wrap !important;
-    gap: 2.29rem !important;
-    align-items: center !important;
-    margin-bottom: 1.2rem !important;
-}
-.ssil-keywords-row .ssil-input,
-.ssil-keywords-row input[type="number"],
-.ssil-keywords-row .ssil-submit-btn,
-.ssil-keywords-row .ssil-btn-primary {
-    min-height: 49px !important;
-    height: 49px !important;
-    padding-top: 13px !important;
-    padding-bottom: 13px !important;
-    display: flex !important;
-    align-items: center !important;
-    box-sizing: border-box !important;
-    font-size: 1em !important;
-}
-.ssil-keywords-row .ssil-input,
-.ssil-keywords-row input[type="url"],
-.ssil-keywords-row input[type="text"] {
-    max-width: 240px !important;
-}
-.ssil-keywords-row .ssil-submit-btn,
-.ssil-keywords-row .ssil-btn-primary {
-    padding-left: 36px !important;
-    padding-right: 36px !important;
-}
-.ssil-keywords-row label {
-    font-size: 1em !important;
-    color: var(--ssil-gray) !important;
-    font-weight: 500 !important;
-    margin-right: 8px !important;
-    display: flex !important;
-    align-items: center !important;
-    gap: 6px !important;
-    cursor: pointer !important;
-}
-
-/* Checkbox styling */
-.ssil-keywords-row input[type="checkbox"] {
-    accent-color: var(--ssil-blue) !important;
-    width: 19px !important;
-    height: 19px !important;
-    border-radius: 5px !important;
-    margin-right: 2px !important;
-}
-
-/* Prioriteit veld */
-.ssil-keywords-row input[type="number"] {
-    max-width: 80px !important;
-    border-radius: 7px !important;
-    padding-left: 11px !important;
-}
-
-/* Metabox zoekveld */
-#ssil-meta-keyword,
-.ssil-metabox-input {
-    width: 100% !important;
-    min-height: 40px !important;
-    font-size: 1em !important;
-    padding: 9px 13px !important;
-    border: 1.6px solid var(--ssil-primary-light) !important;
-    border-radius: 7px !important;
-    background: var(--ssil-bg) !important;
-    color: var(--ssil-text) !important;
-    box-sizing: border-box !important;
-    margin-bottom: 8px !important;
-    outline: none !important;
-    transition: border-color 0.17s, background 0.13s !important;
-}
-#ssil-meta-keyword:focus,
-.ssil-metabox-input:focus {
-    border-color: var(--ssil-blue) !important;
-    background: var(--ssil-primary-light) !important;
-}
-
-#ssil-meta-suggestions a {
-    color: var(--ssil-blue) !important;
-    word-break: break-all !important;
-    text-decoration: underline !important;
-    font-size: 0.98em !important;
-}
-#ssil-meta-suggestions a:hover {
-    color: var(--ssil-blue-dark) !important;
-}
-#ssil-meta-suggestions em {
-    color: #888 !important;
-    font-size: 0.97em !important;
-}
-
-/* Tabel */
-.ssil-table {
-    width: 100% !important;
-    border-collapse: separate !important;
-    margin-top: 10px !important;
-    background: none !important;
-    box-shadow: none !important;
-}
-.ssil-table th,
-.ssil-table.widefat th {
-    background: var(--ssil-bg) !important;
-    color: var(--ssil-text) !important;
-    font-weight: 700 !important;
-    border: none !important;
-    padding: 1rem 1.1rem 0.7rem 1.1rem !important;
-    font-size: 1em !important;
-    text-align: left !important;
-    vertical-align: middle !important;
-}
-.ssil-table td,
-.ssil-table.widefat td {
-    padding: 1rem 1.1rem !important;
-    background: var(--ssil-white) !important;
-    border-radius: 0 !important;
-    border: none !important;
-    font-size: 1em !important;
-    color: var(--ssil-text) !important;
-    vertical-align: middle !important;
-    max-width: 340px !important;
-    word-break: break-all !important;
-}
-.ssil-table tbody tr,
-.ssil-table.widefat tbody tr {
-    background: none !important;
-    box-shadow: none !important;
-}
-.ssil-table td.ssil-badge-td {
-    padding: 0.5em 0.8em !important;
-}
-
-/* Responsive table */
-@media (max-width: 600px) {
-    .ssil-table th, .ssil-table td {
-        padding: 0.7em 0.3em !important;
-        font-size: 0.99em !important;
-    }
-    .ssil-keywords-row {
-        flex-direction: column !important;
-        align-items: stretch !important;
-    }
-}
-
-/* Badge en veldweergave */
-.ssil-badge,
-.ssil-key-badge {
-    display: inline-block !important;
-    background: var(--ssil-blue) !important;
-    color: #fff !important;
-    border-radius: 12px !important;
-    padding: 3px 10px !important;
-    font-size: 0.97em !important;
-    font-weight: 600 !important;
-    margin-left: 6px !important;
-    margin-right: 3px !important;
-    vertical-align: middle !important;
-    letter-spacing: 0.03em !important;
-}
-.ssil-badge-danger {
-    background: var(--ssil-danger) !important;
-}
-.ssil-badge-priority {
-    background: var(--ssil-green) !important;
-}
-.ssil-badge-nofollow {
-    background: #ffad1a !important;
-    color: #533400 !important;
-}
-.ssil-badge-blank {
-    background: #dadada !important;
-    color: #232323 !important;
-}
-
-/* Delete knop */
-.ssil-btn-delete {
-    background: #fff !important;
-    color: var(--ssil-danger) !important;
-    border: 1.5px solid var(--ssil-danger) !important;
-    border-radius: 7px !important;
-    font-weight: 600 !important;
-    padding: 8px 18px !important;
-    cursor: pointer !important;
-    transition: background 0.13s, color 0.13s, border-color 0.13s !important;
-    font-size: 0.99em !important;
-}
-.ssil-btn-delete:hover,
-.ssil-btn-delete:focus {
-    background: var(--ssil-danger-bg) !important;
-    color: var(--ssil-danger-dark) !important;
-    border-color: var(--ssil-danger-dark) !important;
-}
-
-/* Submit button */
-.ssil-submit-wrap {
-    text-align: right !important;
-    margin-top: 32px !important;
-}
-.ssil-submit-btn,
-.ssil-btn-primary {
-    background: linear-gradient(90deg, #1976ff 0%, #4e9efc 100%) !important;
-    color: #fff !important;
-    font-weight: 600 !important;
-    font-size: 1.08em !important;
-    border: none !important;
-    border-radius: 8px !important;
-    padding: 0px 36px !important;
-    cursor: pointer !important;
-    letter-spacing: 0.04em !important;
-    min-height: 49px !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    transition: background 0.18s, transform 0.13s !important;
-    text-decoration: none !important;
-}
-.ssil-submit-btn:hover,
-.ssil-submit-btn:focus,
-.ssil-btn-primary:hover,
-.ssil-btn-primary:focus {
-    background: linear-gradient(90deg, #1567d8 0%, #2075d8 100%) !important;
-    transform: translateY(-1px) scale(1.04) !important;
-    outline: none !important;
-    text-decoration: none !important;
-}
-
-/* LOGS TABLE */
-#ssil-logs-table {
-    width: 100% !important;
-    border-collapse: separate !important;
-    margin-top: 14px !important;
-    margin-bottom: 10px !important;
-    background: none !important;
-    box-shadow: none !important;
-    font-size: 0.99em !important;
-}
-#ssil-logs-table thead th {
-    background: var(--ssil-bg) !important;
-    color: var(--ssil-text) !important;
-    font-weight: 700 !important;
-    border: none !important;
-    padding: 1rem 1.3rem 0.7rem 1.3rem !important;
-    font-size: 1em !important;
-    text-align: left !important;
-}
-#ssil-logs-table tbody td {
-    background: var(--ssil-white) !important;
-    color: var(--ssil-text) !important;
-    border-radius: 8px !important;
-    border: none !important;
-    padding: 0.95em 1.2em !important;
-    font-size: 0.97em !important;
-    transition: background 0.15s !important;
-    box-shadow: none !important;
-}
-#ssil-logs-table tbody tr {
-    background: none !important;
-    box-shadow: none !important;
-}
-#ssil-logs-table tbody tr:hover,
-#ssil-logs-table tr.ssil-row-hover {
-    background: #f0f4fa !important;
-}
-#ssil-logs-table td a {
-    color: var(--ssil-blue) !important;
-    text-decoration: underline !important;
-    word-break: break-all !important;
-}
-#ssil-logs-table td a:hover {
-    color: var(--ssil-blue-dark) !important;
-}
-
-/* Bulk import/export + Rapportage */
-.ssil-bulk-title {
-    margin-bottom: 26px !important;
-    font-size: 1.35em !important;
-    font-weight: 700 !important;
-    color: var(--ssil-text) !important;
-}
-.ssil-bulk-row {
-    display: flex !important;
-    align-items: flex-end !important;
-    gap: 26px !important;
-    margin-bottom: 32px !important;
-    flex-wrap: wrap !important;
-}
-.ssil-bulk-form {
-    margin-bottom: 0 !important;
-    display: flex !important;
-    align-items: center !important;
-    gap: 14px !important;
-    flex-wrap: wrap !important;
-}
-.ssil-bulk-form .ssil-btn,
-.ssil-bulk-form .ssil-btn-primary {
-    min-width: 120px !important;
-    font-size: 1em !important;
-    background: linear-gradient(90deg, #1976ff 0%, #4e9efc 100%) !important;
-    color: #fff !important;
-    font-weight: 600 !important;
-    border: none !important;
-    border-radius: 8px !important;
-    padding: 11px 34px !important;
-    cursor: pointer !important;
-    letter-spacing: 0.03em !important;
-    transition: background 0.18s, transform 0.13s !important;
-    text-decoration: none !important;
-}
-.ssil-bulk-form .ssil-btn:hover,
-.ssil-bulk-form .ssil-btn:focus,
-.ssil-bulk-form .ssil-btn-primary:hover,
-.ssil-bulk-form .ssil-btn-primary:focus {
-    background: linear-gradient(90deg, #1567d8 0%, #2075d8 100%) !important;
-    transform: translateY(-1px) scale(1.04) !important;
-    outline: none !important;
-    text-decoration: none !important;
-}
-.ssil-input-csv {
-    max-width: 320px !important;
-    display: inline-block !important;
-    font-size: 1em !important;
-    border: 1.5px solid var(--ssil-primary-light) !important;
-    background: var(--ssil-bg) !important;
-    padding: 8px 13px !important;
-    border-radius: 7px !important;
-    color: var(--ssil-text) !important;
-}
-@media (max-width: 600px) {
-    .ssil-bulk-row {
-        flex-direction: column !important;
-        gap: 16px !important;
-        align-items: stretch !important;
-    }
-    .ssil-bulk-form {
-        flex-direction: column !important;
-        align-items: stretch !important;
-        gap: 10px !important;
-    }
-    .ssil-input-csv {
-        margin-right: 0 !important;
-        width: 100% !important;
-        max-width: 100% !important;
-    }
-}
-
-/* Notices */
-.notice-ssil-success {
-    background: #e4f9ec !important;
-    border-left: 4px solid #1dd198 !important;
-    color: #155e36 !important;
-    padding: 12px 22px !important;
-    border-radius: 7px !important;
-    margin-bottom: 22px !important;
-}
-.notice-ssil-error {
-    background: #fee2e2 !important;
-    border-left: 4px solid #dc2626 !important;
-    color: #7c1d1d !important;
-    padding: 12px 22px !important;
-    border-radius: 7px !important;
-    margin-bottom: 22px !important;
-}
-
-/* Loading indicator (voor inputs met .ssil-loading) */
-.ssil-loading {
-    background: url('data:image/svg+xml;utf8,<svg width="22" height="22" viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="%232563eb" stroke-width="4"><circle cx="22" cy="22" r="18" opacity="0.4"/><path d="M40 22c0-9.94-8.06-18-18-18"><animateTransform attributeName="transform" type="rotate" from="0 22 22" to="360 22 22" dur="1s" repeatCount="indefinite"/></path></g></svg>') right 12px center no-repeat !important;
-    background-size: 20px 20px !important;
-    transition: background 0.12s !important;
-}
-
-/* Extra rapportage styles */
-.ssil-report-table,
-.ssil-table.widefat {
-    width: 100% !important;
-}
-
-.ssil-report-actions {
-    margin-bottom: 30px !important;
-    display: flex !important;
-    gap: 20px !important;
-    flex-wrap: wrap !important;
-}
-
-.ssil-btn-copy {
-    /* Deze klasse kun je toevoegen voor custom styling als nodig,
-       maar ssil-btn-primary zorgt al voor juiste kleur en formaat */
-}
-
-/* Nieuwe en aangepaste styles */
-
-.ssil-keywords-toolbar {
-    display: flex !important;
-    justify-content: space-between !important;
-    align-items: center !important;
-    margin-bottom: 32px !important;
-    gap: 18px !important;
-    flex-wrap: wrap !important;
-}
-
-.ssil-keywords-searchform {
-    display: flex !important;
-    align-items: center !important;
-    gap: 8px !important;
-    margin: 0 !important;
-}
-
-.ssil-search-input,
-.ssil-btn-search {
-    height: 46px !important;
-    min-height: 46px !important;
-    font-size: 1em !important;
-    border-radius: 8px !important;
-    box-sizing: border-box !important;
-    padding: 0 18px !important;
-    line-height: 1.4 !important;
-    border: 1.8px solid var(--ssil-primary-light) !important;
-}
-
-.ssil-search-input {
-    max-width: 220px !important;
-    background: var(--ssil-bg) !important;
-    color: var(--ssil-text) !important;
-}
-
-.ssil-search-input:focus {
-    border-color: var(--ssil-blue) !important;
-    background: var(--ssil-primary-light) !important;
-}
-
-.ssil-btn-search {
-    background: linear-gradient(90deg, #1976ff 0%, #4e9efc 100%) !important;
-    color: #fff !important;
-    font-weight: 600 !important;
-    border: none !important;
-    cursor: pointer !important;
-    padding: 0 32px !important;
-    font-family: inherit !important;
-    transition: background 0.18s, transform 0.13s !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-}
-
-.ssil-btn-search:hover,
-.ssil-btn-search:focus {
-    background: linear-gradient(90deg, #1567d8 0%, #2075d8 100%) !important;
-    outline: none !important;
-    transform: translateY(-1px) scale(1.04) !important;
-}
-
-#ssil-suggest-wrap {
-    margin-bottom: 20px;
-    /* Je bestaande suggestiestijlen */
-}
-
-/* New suggestion actions styling */
-.ssil-suggest-actions {
-    display: flex !important;
-    justify-content: space-between !important;
-    gap: 16px !important;
-    margin-top: 24px !important;
-    margin-bottom: 6px !important;
-    width: 100% !important;
-}
-
-.ssil-btn-add-suggested {
-    /* Helemaal links, dus geen extra css nodig */
-}
-
-.ssil-btn-close-suggest {
-    margin-left: auto !important;
-}
-
-.ssil-suggest-actions .ssil-btn,
-.ssil-suggest-actions .ssil-btn-primary {
-    min-width: 160px !important;
-    height: 49px !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    font-size: 1em !important;
+  .yoast-settings-table th[scope="row"],
+  .yoast-settings-table .yoast-label {
+    width: 150px;
+    min-width: 100px;
+    max-width: 200px;
+  }
 }

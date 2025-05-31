@@ -1,8 +1,11 @@
 <?php
 if (!defined('ABSPATH')) exit;
 
-// Huidige pagina bepalen voor actieve tab
-$current = isset($_GET['page']) ? sanitize_text_field($_GET['page']) : '';
+// Bepaal huidige pagina (ook bij extra query-strings)
+$current = '';
+if (isset($_GET['page'])) {
+    $current = preg_replace('/[^a-zA-Z0-9_\-]/', '', $_GET['page']);
+}
 
 $tabs = [
     'ssil_main'     => ['title' => 'Instellingen',        'url' => admin_url('admin.php?page=ssil_main')],
@@ -12,10 +15,10 @@ $tabs = [
     'ssil_bulk'     => ['title' => 'Bulk Import/Export',  'url' => admin_url('admin.php?page=ssil_bulk')],
 ];
 ?>
-<nav class="nav-tab-wrapper" style="margin-bottom:32px;">
-    <?php foreach ($tabs as $slug => $tab) : ?>
+<nav class="yoast-tabs yoast-mb-4">
+    <?php foreach ($tabs as $slug => $tab): ?>
         <a href="<?php echo esc_url($tab['url']); ?>"
-           class="nav-tab<?php echo $current === $slug ? ' nav-tab-active' : ''; ?>">
+           class="yoast-tab<?php echo ($current === $slug) ? ' yoast-tab-active' : ''; ?>">
             <?php echo esc_html($tab['title']); ?>
         </a>
     <?php endforeach; ?>
