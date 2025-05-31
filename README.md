@@ -20,7 +20,7 @@
 
 1. **Download of clone deze repository:**
    ```bash
-   git clone https://github.com/jouw-github/ssil.git
+   git clone https://github.com/Yolol100/Link.git
    ```
 
 2. **Upload naar `/wp-content/plugins/` en activeer in WordPress.**
@@ -57,7 +57,7 @@ Zie ook de [Wiki](https://github.com/jouw-github/ssil/wiki) voor uitgebreide uit
 
 ## 👤 Auteurs & licentie
 
-**Aangemaakt door [Yolol](https://github.com/jouw-github)  
+**Aangemaakt door [Yolol](https://github.com/Yolol100)  
 Copyright © 2025**
 
 MIT License – [Zie LICENSE file](LICENSE)
