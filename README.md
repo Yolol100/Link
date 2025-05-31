@@ -19,15 +19,12 @@
 ## 🚀 Snel starten
 
 1. **Download of clone deze repository:**
+   
    ```bash
    git clone https://github.com/Yolol100/Link.git
-   ```
-
-2. **Upload naar `/wp-content/plugins/` en activeer in WordPress.**
-
-3. Navigeer naar het SSIL-menu in je WordPress admin (via "Instellingen" of eigen menu-item).
-
-4. Stel je gewenste keywords, post types en opties in. Klaar!
+3. **Upload naar `/wp-content/plugins/` en activeer in WordPress.**
+4. Navigeer naar het SSIL-menu in je WordPress admin (via "Instellingen" of eigen menu-item).
+5. Stel je gewenste keywords, post types en opties in. Klaar!
 
 ## 📚 Documentatie
 
