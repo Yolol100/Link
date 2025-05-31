@@ -57,7 +57,7 @@ Zie ook de [Wiki](https://github.com/jouw-github/ssil/wiki) voor uitgebreide uit
 
 ## 👤 Auteurs & licentie
 
-**Aangemaakt door [Jouw Naam](https://github.com/jouw-github)  
+**Aangemaakt door [Yolol](https://github.com/jouw-github)  
 Copyright © 2025**
 
 MIT License – [Zie LICENSE file](LICENSE)
