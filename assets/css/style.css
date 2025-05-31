@@ -1,0 +1,590 @@
+:root {
+    --ssil-primary-light: #f8faff;
+    --ssil-danger: #dc2626;
+    --ssil-danger-bg: #fee2e2;
+    --ssil-danger-dark: #b91c1c;
+    --ssil-bg: #f8faff;
+    --ssil-text: #1e293b;
+    --ssil-white: #fff;
+    --ssil-radius: 14px;
+    --ssil-blue: #2563eb;
+    --ssil-blue-dark: #1743a2;
+    --ssil-gray: #64748b;
+    --ssil-gray-light: #e5eaf4;
+    --ssil-green: #22c55e;
+}
+
+/* Wrapper */
+.ssil-wrap {
+    background: var(--ssil-white) !important;
+    border-radius: var(--ssil-radius) !important;
+    padding: 2.7rem 3rem !important;
+    margin: 2.2rem auto 2rem auto !important;
+    max-width: 900px !important;
+    font-family: 'Inter', 'Roboto', 'Segoe UI', Arial, sans-serif !important;
+    color: var(--ssil-text) !important;
+    box-shadow: 0 6px 32px 0 #e8eef7 !important;
+}
+
+@media (max-width: 800px) {
+    .ssil-wrap {
+        padding: 1.1rem 0.7rem !important;
+        max-width: 100% !important;
+    }
+}
+
+/* Global margins */
+.ssil-wrap > .button,
+.ssil-wrap > form,
+.ssil-wrap > table,
+.ssil-wrap > .widefat {
+    margin-bottom: 32px !important;
+}
+
+.ssil-wrap .ssil-keywords-form {
+    margin-bottom: 32px !important;
+}
+
+.ssil-wrap .ssil-bulk-form {
+    margin-bottom: 0 !important;
+}
+
+.ssil-wrap .nav-tab-wrapper {
+    margin-bottom: 36px !important;
+}
+
+.ssil-wrap .widefat,
+.ssil-wrap .ssil-table {
+    margin-bottom: 30px !important;
+    margin-top: 0 !important;
+}
+
+.ssil-wrap form + table,
+.ssil-wrap .ssil-keywords-form + table {
+    margin-top: 18px !important;
+}
+
+.ssil-wrap h3,
+.ssil-wrap .ssil-suggest-header {
+    margin-top: 0 !important;
+    margin-bottom: 16px !important;
+}
+
+/* Tabs */
+.ssil-wrap .nav-tab-wrapper {
+    background: var(--ssil-bg) !important;
+    padding-left: 0.6rem !important;
+    border-radius: 13px 13px 0 0 !important;
+    min-height: 52px !important;
+    display: flex !important;
+    gap: 0 !important;
+    border-bottom: none !important;
+}
+.ssil-wrap .nav-tab {
+    font-size: 1.10em !important;
+    font-weight: 600 !important;
+    padding: 1rem 2.1rem 1rem 1.5rem !important;
+    border-radius: 11px 11px 0 0 !important;
+    margin-right: 4px !important;
+    border: none !important;
+    background: none !important;
+    color: var(--ssil-gray) !important;
+    transition: color 0.19s, background 0.15s !important;
+    outline: none !important;
+    letter-spacing: 0.02em !important;
+}
+.ssil-wrap .nav-tab:hover,
+.ssil-wrap .nav-tab:focus {
+    background: var(--ssil-primary-light) !important;
+    color: var(--ssil-blue) !important;
+}
+.ssil-wrap .nav-tab-active {
+    background: var(--ssil-primary-light) !important;
+    color: var(--ssil-text) !important;
+    border-bottom: 3px solid var(--ssil-blue) !important;
+    z-index: 2 !important;
+}
+
+/* Keywords formulier: alle velden en knop even hoog naast elkaar */
+.ssil-keywords-row {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 2.29rem !important;
+    align-items: center !important;
+    margin-bottom: 1.2rem !important;
+}
+.ssil-keywords-row .ssil-input,
+.ssil-keywords-row input[type="number"],
+.ssil-keywords-row .ssil-submit-btn,
+.ssil-keywords-row .ssil-btn-primary {
+    min-height: 49px !important;
+    height: 49px !important;
+    padding-top: 13px !important;
+    padding-bottom: 13px !important;
+    display: flex !important;
+    align-items: center !important;
+    box-sizing: border-box !important;
+    font-size: 1em !important;
+}
+.ssil-keywords-row .ssil-input,
+.ssil-keywords-row input[type="url"],
+.ssil-keywords-row input[type="text"] {
+    max-width: 240px !important;
+}
+.ssil-keywords-row .ssil-submit-btn,
+.ssil-keywords-row .ssil-btn-primary {
+    padding-left: 36px !important;
+    padding-right: 36px !important;
+}
+.ssil-keywords-row label {
+    font-size: 1em !important;
+    color: var(--ssil-gray) !important;
+    font-weight: 500 !important;
+    margin-right: 8px !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    cursor: pointer !important;
+}
+
+/* Checkbox styling */
+.ssil-keywords-row input[type="checkbox"] {
+    accent-color: var(--ssil-blue) !important;
+    width: 19px !important;
+    height: 19px !important;
+    border-radius: 5px !important;
+    margin-right: 2px !important;
+}
+
+/* Prioriteit veld */
+.ssil-keywords-row input[type="number"] {
+    max-width: 80px !important;
+    border-radius: 7px !important;
+    padding-left: 11px !important;
+}
+
+/* Metabox zoekveld */
+#ssil-meta-keyword,
+.ssil-metabox-input {
+    width: 100% !important;
+    min-height: 40px !important;
+    font-size: 1em !important;
+    padding: 9px 13px !important;
+    border: 1.6px solid var(--ssil-primary-light) !important;
+    border-radius: 7px !important;
+    background: var(--ssil-bg) !important;
+    color: var(--ssil-text) !important;
+    box-sizing: border-box !important;
+    margin-bottom: 8px !important;
+    outline: none !important;
+    transition: border-color 0.17s, background 0.13s !important;
+}
+#ssil-meta-keyword:focus,
+.ssil-metabox-input:focus {
+    border-color: var(--ssil-blue) !important;
+    background: var(--ssil-primary-light) !important;
+}
+
+#ssil-meta-suggestions a {
+    color: var(--ssil-blue) !important;
+    word-break: break-all !important;
+    text-decoration: underline !important;
+    font-size: 0.98em !important;
+}
+#ssil-meta-suggestions a:hover {
+    color: var(--ssil-blue-dark) !important;
+}
+#ssil-meta-suggestions em {
+    color: #888 !important;
+    font-size: 0.97em !important;
+}
+
+/* Tabel */
+.ssil-table {
+    width: 100% !important;
+    border-collapse: separate !important;
+    margin-top: 10px !important;
+    background: none !important;
+    box-shadow: none !important;
+}
+.ssil-table th,
+.ssil-table.widefat th {
+    background: var(--ssil-bg) !important;
+    color: var(--ssil-text) !important;
+    font-weight: 700 !important;
+    border: none !important;
+    padding: 1rem 1.1rem 0.7rem 1.1rem !important;
+    font-size: 1em !important;
+    text-align: left !important;
+    vertical-align: middle !important;
+}
+.ssil-table td,
+.ssil-table.widefat td {
+    padding: 1rem 1.1rem !important;
+    background: var(--ssil-white) !important;
+    border-radius: 0 !important;
+    border: none !important;
+    font-size: 1em !important;
+    color: var(--ssil-text) !important;
+    vertical-align: middle !important;
+    max-width: 340px !important;
+    word-break: break-all !important;
+}
+.ssil-table tbody tr,
+.ssil-table.widefat tbody tr {
+    background: none !important;
+    box-shadow: none !important;
+}
+.ssil-table td.ssil-badge-td {
+    padding: 0.5em 0.8em !important;
+}
+
+/* Responsive table */
+@media (max-width: 600px) {
+    .ssil-table th, .ssil-table td {
+        padding: 0.7em 0.3em !important;
+        font-size: 0.99em !important;
+    }
+    .ssil-keywords-row {
+        flex-direction: column !important;
+        align-items: stretch !important;
+    }
+}
+
+/* Badge en veldweergave */
+.ssil-badge,
+.ssil-key-badge {
+    display: inline-block !important;
+    background: var(--ssil-blue) !important;
+    color: #fff !important;
+    border-radius: 12px !important;
+    padding: 3px 10px !important;
+    font-size: 0.97em !important;
+    font-weight: 600 !important;
+    margin-left: 6px !important;
+    margin-right: 3px !important;
+    vertical-align: middle !important;
+    letter-spacing: 0.03em !important;
+}
+.ssil-badge-danger {
+    background: var(--ssil-danger) !important;
+}
+.ssil-badge-priority {
+    background: var(--ssil-green) !important;
+}
+.ssil-badge-nofollow {
+    background: #ffad1a !important;
+    color: #533400 !important;
+}
+.ssil-badge-blank {
+    background: #dadada !important;
+    color: #232323 !important;
+}
+
+/* Delete knop */
+.ssil-btn-delete {
+    background: #fff !important;
+    color: var(--ssil-danger) !important;
+    border: 1.5px solid var(--ssil-danger) !important;
+    border-radius: 7px !important;
+    font-weight: 600 !important;
+    padding: 8px 18px !important;
+    cursor: pointer !important;
+    transition: background 0.13s, color 0.13s, border-color 0.13s !important;
+    font-size: 0.99em !important;
+}
+.ssil-btn-delete:hover,
+.ssil-btn-delete:focus {
+    background: var(--ssil-danger-bg) !important;
+    color: var(--ssil-danger-dark) !important;
+    border-color: var(--ssil-danger-dark) !important;
+}
+
+/* Submit button */
+.ssil-submit-wrap {
+    text-align: right !important;
+    margin-top: 32px !important;
+}
+.ssil-submit-btn,
+.ssil-btn-primary {
+    background: linear-gradient(90deg, #1976ff 0%, #4e9efc 100%) !important;
+    color: #fff !important;
+    font-weight: 600 !important;
+    font-size: 1.08em !important;
+    border: none !important;
+    border-radius: 8px !important;
+    padding: 0px 36px !important;
+    cursor: pointer !important;
+    letter-spacing: 0.04em !important;
+    min-height: 49px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    transition: background 0.18s, transform 0.13s !important;
+    text-decoration: none !important;
+}
+.ssil-submit-btn:hover,
+.ssil-submit-btn:focus,
+.ssil-btn-primary:hover,
+.ssil-btn-primary:focus {
+    background: linear-gradient(90deg, #1567d8 0%, #2075d8 100%) !important;
+    transform: translateY(-1px) scale(1.04) !important;
+    outline: none !important;
+    text-decoration: none !important;
+}
+
+/* LOGS TABLE */
+#ssil-logs-table {
+    width: 100% !important;
+    border-collapse: separate !important;
+    margin-top: 14px !important;
+    margin-bottom: 10px !important;
+    background: none !important;
+    box-shadow: none !important;
+    font-size: 0.99em !important;
+}
+#ssil-logs-table thead th {
+    background: var(--ssil-bg) !important;
+    color: var(--ssil-text) !important;
+    font-weight: 700 !important;
+    border: none !important;
+    padding: 1rem 1.3rem 0.7rem 1.3rem !important;
+    font-size: 1em !important;
+    text-align: left !important;
+}
+#ssil-logs-table tbody td {
+    background: var(--ssil-white) !important;
+    color: var(--ssil-text) !important;
+    border-radius: 8px !important;
+    border: none !important;
+    padding: 0.95em 1.2em !important;
+    font-size: 0.97em !important;
+    transition: background 0.15s !important;
+    box-shadow: none !important;
+}
+#ssil-logs-table tbody tr {
+    background: none !important;
+    box-shadow: none !important;
+}
+#ssil-logs-table tbody tr:hover,
+#ssil-logs-table tr.ssil-row-hover {
+    background: #f0f4fa !important;
+}
+#ssil-logs-table td a {
+    color: var(--ssil-blue) !important;
+    text-decoration: underline !important;
+    word-break: break-all !important;
+}
+#ssil-logs-table td a:hover {
+    color: var(--ssil-blue-dark) !important;
+}
+
+/* Bulk import/export + Rapportage */
+.ssil-bulk-title {
+    margin-bottom: 26px !important;
+    font-size: 1.35em !important;
+    font-weight: 700 !important;
+    color: var(--ssil-text) !important;
+}
+.ssil-bulk-row {
+    display: flex !important;
+    align-items: flex-end !important;
+    gap: 26px !important;
+    margin-bottom: 32px !important;
+    flex-wrap: wrap !important;
+}
+.ssil-bulk-form {
+    margin-bottom: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 14px !important;
+    flex-wrap: wrap !important;
+}
+.ssil-bulk-form .ssil-btn,
+.ssil-bulk-form .ssil-btn-primary {
+    min-width: 120px !important;
+    font-size: 1em !important;
+    background: linear-gradient(90deg, #1976ff 0%, #4e9efc 100%) !important;
+    color: #fff !important;
+    font-weight: 600 !important;
+    border: none !important;
+    border-radius: 8px !important;
+    padding: 11px 34px !important;
+    cursor: pointer !important;
+    letter-spacing: 0.03em !important;
+    transition: background 0.18s, transform 0.13s !important;
+    text-decoration: none !important;
+}
+.ssil-bulk-form .ssil-btn:hover,
+.ssil-bulk-form .ssil-btn:focus,
+.ssil-bulk-form .ssil-btn-primary:hover,
+.ssil-bulk-form .ssil-btn-primary:focus {
+    background: linear-gradient(90deg, #1567d8 0%, #2075d8 100%) !important;
+    transform: translateY(-1px) scale(1.04) !important;
+    outline: none !important;
+    text-decoration: none !important;
+}
+.ssil-input-csv {
+    max-width: 320px !important;
+    display: inline-block !important;
+    font-size: 1em !important;
+    border: 1.5px solid var(--ssil-primary-light) !important;
+    background: var(--ssil-bg) !important;
+    padding: 8px 13px !important;
+    border-radius: 7px !important;
+    color: var(--ssil-text) !important;
+}
+@media (max-width: 600px) {
+    .ssil-bulk-row {
+        flex-direction: column !important;
+        gap: 16px !important;
+        align-items: stretch !important;
+    }
+    .ssil-bulk-form {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 10px !important;
+    }
+    .ssil-input-csv {
+        margin-right: 0 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+}
+
+/* Notices */
+.notice-ssil-success {
+    background: #e4f9ec !important;
+    border-left: 4px solid #1dd198 !important;
+    color: #155e36 !important;
+    padding: 12px 22px !important;
+    border-radius: 7px !important;
+    margin-bottom: 22px !important;
+}
+.notice-ssil-error {
+    background: #fee2e2 !important;
+    border-left: 4px solid #dc2626 !important;
+    color: #7c1d1d !important;
+    padding: 12px 22px !important;
+    border-radius: 7px !important;
+    margin-bottom: 22px !important;
+}
+
+/* Loading indicator (voor inputs met .ssil-loading) */
+.ssil-loading {
+    background: url('data:image/svg+xml;utf8,<svg width="22" height="22" viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="%232563eb" stroke-width="4"><circle cx="22" cy="22" r="18" opacity="0.4"/><path d="M40 22c0-9.94-8.06-18-18-18"><animateTransform attributeName="transform" type="rotate" from="0 22 22" to="360 22 22" dur="1s" repeatCount="indefinite"/></path></g></svg>') right 12px center no-repeat !important;
+    background-size: 20px 20px !important;
+    transition: background 0.12s !important;
+}
+
+/* Extra rapportage styles */
+.ssil-report-table,
+.ssil-table.widefat {
+    width: 100% !important;
+}
+
+.ssil-report-actions {
+    margin-bottom: 30px !important;
+    display: flex !important;
+    gap: 20px !important;
+    flex-wrap: wrap !important;
+}
+
+.ssil-btn-copy {
+    /* Deze klasse kun je toevoegen voor custom styling als nodig,
+       maar ssil-btn-primary zorgt al voor juiste kleur en formaat */
+}
+
+/* Nieuwe en aangepaste styles */
+
+.ssil-keywords-toolbar {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    margin-bottom: 32px !important;
+    gap: 18px !important;
+    flex-wrap: wrap !important;
+}
+
+.ssil-keywords-searchform {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    margin: 0 !important;
+}
+
+.ssil-search-input,
+.ssil-btn-search {
+    height: 46px !important;
+    min-height: 46px !important;
+    font-size: 1em !important;
+    border-radius: 8px !important;
+    box-sizing: border-box !important;
+    padding: 0 18px !important;
+    line-height: 1.4 !important;
+    border: 1.8px solid var(--ssil-primary-light) !important;
+}
+
+.ssil-search-input {
+    max-width: 220px !important;
+    background: var(--ssil-bg) !important;
+    color: var(--ssil-text) !important;
+}
+
+.ssil-search-input:focus {
+    border-color: var(--ssil-blue) !important;
+    background: var(--ssil-primary-light) !important;
+}
+
+.ssil-btn-search {
+    background: linear-gradient(90deg, #1976ff 0%, #4e9efc 100%) !important;
+    color: #fff !important;
+    font-weight: 600 !important;
+    border: none !important;
+    cursor: pointer !important;
+    padding: 0 32px !important;
+    font-family: inherit !important;
+    transition: background 0.18s, transform 0.13s !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.ssil-btn-search:hover,
+.ssil-btn-search:focus {
+    background: linear-gradient(90deg, #1567d8 0%, #2075d8 100%) !important;
+    outline: none !important;
+    transform: translateY(-1px) scale(1.04) !important;
+}
+
+#ssil-suggest-wrap {
+    margin-bottom: 20px;
+    /* Je bestaande suggestiestijlen */
+}
+
+/* New suggestion actions styling */
+.ssil-suggest-actions {
+    display: flex !important;
+    justify-content: space-between !important;
+    gap: 16px !important;
+    margin-top: 24px !important;
+    margin-bottom: 6px !important;
+    width: 100% !important;
+}
+
+.ssil-btn-add-suggested {
+    /* Helemaal links, dus geen extra css nodig */
+}
+
+.ssil-btn-close-suggest {
+    margin-left: auto !important;
+}
+
+.ssil-suggest-actions .ssil-btn,
+.ssil-suggest-actions .ssil-btn-primary {
+    min-width: 160px !important;
+    height: 49px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 1em !important;
+}
