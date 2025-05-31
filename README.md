@@ -7,8 +7,6 @@
 [![MIT License](https://img.shields.io/github/license/jouw-github/ssil)](LICENSE)
 [![Last Updated](https://img.shields.io/github/last-commit/jouw-github/ssil)](https://github.com/jouw-github/ssil/commits/main)
 
----
-
 ## ✨ Features
 
 - **Automatisch interne links plaatsen** op basis van door jou ingestelde keywords.
@@ -17,8 +15,6 @@
 - **Direct feedback**: toasts, validatie, spinners en duidelijke foutmeldingen.
 - **Veilig en privacybewust**: geen tracking, geen datalekrisico’s.
 - **Simpel te integreren** in bestaande WordPress-sites.
-
----
 
 ## 🚀 Snel starten
 
@@ -33,8 +29,6 @@
 
 4. Stel je gewenste keywords, post types en opties in. Klaar!
 
----
-
 ## 📚 Documentatie
 
 - **Instellingen**: Configureer maximaal aantal links, uitsluitingen, post types en meer.
@@ -45,8 +39,6 @@
 
 Zie ook de [Wiki](https://github.com/jouw-github/ssil/wiki) voor uitgebreide uitleg.
 
----
-
 ## 💻 Voor ontwikkelaars
 
 - **Modulair opgebouwd** (MVC-ish, alle admin views gescheiden).
@@ -56,16 +48,12 @@ Zie ook de [Wiki](https://github.com/jouw-github/ssil/wiki) voor uitgebreide uit
 
 **Pull requests, issues en feedback zijn welkom!**
 
----
-
 ## 🛠️ Roadmap & ideeën
 
 - [ ] AI-powered keywordsuggesties (optioneel via API)
 - [ ] Meertaligheid (WPML/Polylang support)
 - [ ] Meer rapportage/exports (PDF, Excel)
 - [ ] Gutenberg-blokken voor linkbeheer
-
----
 
 ## 👤 Auteurs & licentie
 
@@ -74,14 +62,10 @@ Copyright © 2025**
 
 MIT License – [Zie LICENSE file](LICENSE)
 
----
-
 ## 🤝 Bijdragen
 
 - Fork, feature branches, duidelijke PR’s en korte motivatie zijn welkom.
 - Gebruik bij voorkeur Engels voor code en issues, Nederlands voor UI/UX mag.
-
----
 
 ## 🙌 Bedankt voor het gebruiken & bijdragen!
 
