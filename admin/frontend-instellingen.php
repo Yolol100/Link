@@ -27,25 +27,25 @@ function ssil_render_settings_page() {
                 <tr>
                     <th class="yoast-font-bold yoast-label" scope="row"><label for="ssil_max_keywords">Max keywords per pagina</label></th>
                     <td>
-                        <input type="number" id="ssil_max_keywords" name="ssil_max_keywords" class="yoast-input" value="<?php echo esc_attr($ssil_max_keywords); ?>" min="1" required />
+                        <input type="number" id="ssil_max_keywords" name="ssil_max_keywords" class="yoast-input" value="<?php echo esc_attr($ssil_max_keywords); ?>" min="1" required style="width:100%;" />
                     </td>
                 </tr>
                 <tr>
                     <th class="yoast-font-bold yoast-label" scope="row"><label for="ssil_exclude_ids">Uitsluiten (post/page IDs, komma-gescheiden)</label></th>
                     <td>
-                        <input type="text" id="ssil_exclude_ids" name="ssil_exclude_ids" class="yoast-input" value="<?php echo esc_attr($ssil_exclude_ids); ?>" placeholder="Bijv. 10,12,15" />
+                        <input type="text" id="ssil_exclude_ids" name="ssil_exclude_ids" class="yoast-input" value="<?php echo esc_attr($ssil_exclude_ids); ?>" placeholder="Bijv. 10,12,15" style="width:100%;" />
                     </td>
                 </tr>
                 <tr>
                     <th class="yoast-font-bold yoast-label" scope="row"><label for="ssil_exclude_classes">Uitsluiten CSS-klassen (komma-gescheiden)</label></th>
                     <td>
-                        <input type="text" id="ssil_exclude_classes" name="ssil_exclude_classes" class="yoast-input" value="<?php echo esc_attr($ssil_exclude_classes); ?>" placeholder="Bijv. .no-link,.footer-link" />
+                        <input type="text" id="ssil_exclude_classes" name="ssil_exclude_classes" class="yoast-input" value="<?php echo esc_attr($ssil_exclude_classes); ?>" placeholder="Bijv. .no-link,.footer-link" style="width:100%;" />
                     </td>
                 </tr>
                 <tr>
                     <th class="yoast-font-bold yoast-label" scope="row"><label for="ssil_blacklist_keywords">Blacklist Keywords (komma-gescheiden)</label></th>
                     <td>
-                        <input type="text" id="ssil_blacklist_keywords" name="ssil_blacklist_keywords" class="yoast-input" value="<?php echo esc_attr($ssil_blacklist_keywords); ?>" placeholder="Bijv. kopen,gratis,download" />
+                        <input type="text" id="ssil_blacklist_keywords" name="ssil_blacklist_keywords" class="yoast-input" value="<?php echo esc_attr($ssil_blacklist_keywords); ?>" placeholder="Bijv. kopen,gratis,download" style="width:100%;" />
                     </td>
                 </tr>
                 <tr>
@@ -82,7 +82,7 @@ function ssil_render_settings_page() {
                     </td>
                 </tr>
             </table>
-            <div class="yoast-mt-4">
+            <div class="ssil-settings-btn-row">
                 <button type="submit" class="yoast-button-primary ssil-settings-save-btn">
                     <span class="ssil-btn-text">Opslaan</span>
                     <span class="ssil-btn-spinner" style="display:none;vertical-align:middle;margin-left:8px;">

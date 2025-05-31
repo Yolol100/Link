@@ -6,7 +6,7 @@ function ssil_render_report_view($stats) {
     <div class="yoast-card yoast-p-4">
         <?php include SSIL_PATH . 'admin/tabs.php'; ?>
 
-        <div class="yoast-report-actions yoast-mb-4">
+        <div class="yoast-report-actions yoast-mb-4" style="display: flex; justify-content: flex-end; gap: 20px; flex-wrap: wrap;">
             <button type="button" id="ssil-copy-report" class="yoast-button-primary yoast-btn-copy">Kopieer als tabel</button>
         </div>
 

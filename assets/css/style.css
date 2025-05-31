@@ -518,10 +518,11 @@ input[type="number"].yoast-input-priority {
 
 /* RAPPORTAGE */
 .yoast-report-actions {
-  margin-bottom: 24px !important;
   display: flex !important;
+  justify-content: flex-end !important;
   gap: 20px !important;
   flex-wrap: wrap !important;
+  margin-bottom: 24px !important;
 }
 .yoast-btn-copy {}
 
@@ -637,12 +638,47 @@ input[type="number"].yoast-input-priority {
   white-space: nowrap;
 }
 
-/* Horizontaal centreren en extra verticale marge voor yoast-card binnen de WordPress admin */
-.yoast-card {
-  margin-left: auto !important;
-  margin-right: auto !important;
-  margin-top: 32px !important;
-  margin-bottom: 32px !important;
+/* Alle invoervelden binnen de instellingenpagina/table 100% breed */
+.yoast-settings-table .yoast-input,
+.yoast-settings-table input[type="text"],
+.yoast-settings-table input[type="number"],
+.yoast-settings-table input[type="url"],
+.yoast-settings-table select,
+.yoast-settings-table textarea {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box;
+}
+
+/* SPECIFIEK VOOR DE INSTELLINGEN-TABEL: LINKERKANT BREEDER, RECHTERKANT SMALLER */
+.yoast-settings-table th[scope="row"],
+.yoast-settings-table .yoast-label {
+  width: 340px;
+  min-width: 250px;
+  max-width: 390px;
+  white-space: normal;
+}
+
+.yoast-settings-table td {
+  width: auto;
+  max-width: 540px;
+}
+
+@media (max-width: 800px) {
+  .yoast-settings-table th[scope="row"],
+  .yoast-settings-table .yoast-label {
+    width: 150px;
+    min-width: 100px;
+    max-width: 200px;
+  }
+}
+
+/* Knoppenrij rechts uitlijnen */
+.ssil-settings-btn-row {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  margin-top: 1.5rem;
 }
 
 /* Toegevoegd: suggestie acties */
@@ -664,28 +700,5 @@ input[type="number"].yoast-input-priority {
   }
   .ssil-btn-close-suggest {
     margin-left: 0;
-  }
-}
-
-/* Specifiek voor de instellingen-tabel: maak linkerkant breder, rechterkant smaller */
-.yoast-settings-table th[scope="row"],
-.yoast-settings-table .yoast-label {
-  width: 340px;
-  min-width: 250px;
-  max-width: 390px;
-  white-space: normal;
-}
-
-.yoast-settings-table td {
-  width: auto;
-  max-width: 540px;
-}
-
-@media (max-width: 800px) {
-  .yoast-settings-table th[scope="row"],
-  .yoast-settings-table .yoast-label {
-    width: 150px;
-    min-width: 100px;
-    max-width: 200px;
   }
 }
