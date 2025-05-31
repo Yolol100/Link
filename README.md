@@ -69,5 +69,5 @@ MIT License – [Zie LICENSE file](LICENSE)
 
 ## 🙌 Bedankt voor het gebruiken & bijdragen!
 
-Vragen of suggesties? Open een issue of mail naar `support@jouwdomein.nl`.  
+Vragen of suggesties? Open een issue of mail naar `info@andrewbaeten.nl`.  
 Vind je het nuttig? Geef een ⭐ op GitHub!
