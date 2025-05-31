@@ -19,7 +19,7 @@
 ## 🚀 Snel starten
 
 1. **Download of clone deze repository:**
-   
+
    ```bash
    git clone https://github.com/Yolol100/Link.git
 3. **Upload naar `/wp-content/plugins/` en activeer in WordPress.**
