@@ -1,10 +1,12 @@
 <?php
-if (!defined('ABSPATH')) exit;
+declare(strict_types=1);
 
-// Bepaal huidige pagina (ook bij extra query-strings)
+defined('ABSPATH') || exit;
+
+// Bepaal huidige pagina veilig (zelfs bij rare querystrings)
 $current = '';
 if (isset($_GET['page'])) {
-    $current = preg_replace('/[^a-zA-Z0-9_\-]/', '', $_GET['page']);
+    $current = preg_replace('/[^a-zA-Z0-9_\-]/', '', (string)$_GET['page']);
 }
 
 $tabs = [
@@ -14,6 +16,11 @@ $tabs = [
     'ssil_report'   => ['title' => 'Rapportage',          'url' => admin_url('admin.php?page=ssil_report')],
     'ssil_bulk'     => ['title' => 'Bulk Import/Export',  'url' => admin_url('admin.php?page=ssil_bulk')],
 ];
+
+// Zet $current leeg als hij niet in tabs voorkomt (gebeurt alleen bij vreemde URL)
+if (!array_key_exists($current, $tabs)) {
+    $current = '';
+}
 ?>
 <nav class="yoast-tabs yoast-mb-4">
     <?php foreach ($tabs as $slug => $tab): ?>

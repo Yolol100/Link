@@ -1,49 +1,63 @@
 <?php
-if (!defined('ABSPATH')) exit;
+declare(strict_types=1);
 
-// Make sure WordPress admin environment is fully loaded
-add_action('init', function() {
-    // Check if the export button is clicked and nonce is valid
-    if (isset($_POST['ssil_export']) && check_admin_referer('ssil_bulk_export', 'ssil_bulk_export_nonce')) {
-        ssil_handle_export();  // Call the export function if button is clicked
+namespace Webactueel\SSIL;
+
+defined('ABSPATH') || exit;
+
+/**
+ * Handles the export trigger when the form is submitted in admin.
+ *
+ * @return void
+ */
+function maybe_handle_export(): void
+{
+    // Only handle POST requests in admin
+    if (
+        is_admin() &&
+        isset($_POST['ssil_export']) &&
+        check_admin_referer('ssil_bulk_export', 'ssil_bulk_export_nonce')
+    ) {
+        handle_export();
     }
-});
+}
+add_action('init', __NAMESPACE__ . '\\maybe_handle_export');
 
-function ssil_handle_export() {
-    // Get the keyword-to-URL mappings from the database
+/**
+ * Outputs CSV for all keyword-to-URL mappings and forces download.
+ *
+ * @return void
+ */
+function handle_export(): void
+{
     $links = get_option('ssil_links', []);
 
-    // Set headers for the CSV file
-    header('Content-Type: text/csv');
+    header('Content-Type: text/csv; charset=utf-8');
     header('Content-Disposition: attachment; filename="keywords-export.csv"');
+    header('Pragma: no-cache');
+    header('Expires: 0');
 
-    // Open PHP's output stream for writing CSV
     $output = fopen('php://output', 'w');
-
-    // Write the CSV header
-    fputcsv($output, ['keyword', 'url', 'nofollow', 'target_blank', 'priority']);
-    
-    // Process each keyword and URL mapping and write to CSV
-    foreach ($links as $k => $info) {
-        // Extract URL and other settings
-        $url = is_array($info) ? ($info['url'] ?? '') : $info;
-        
-        // If the URL is relative (e.g., "/page"), convert it to a full URL
-        if (strpos($url, '/') === 0) {
-            // Make it a full URL by prepending the site URL
-            $url = get_site_url() . $url;
-        }
-
-        // Check for additional settings (nofollow, target_blank, priority)
-        $nofollow = is_array($info) ? (!empty($info['nofollow']) ? '1' : '0') : '0';
-        $target_blank = is_array($info) ? (!empty($info['target_blank']) ? '1' : '0') : '0';
-        $priority = is_array($info) ? (int)($info['priority'] ?? 0) : 0;
-
-        // Write the row for each keyword mapping
-        fputcsv($output, [$k, $url, $nofollow, $target_blank, $priority]);
+    if (!$output) {
+        wp_die(__('Kan exportbestand niet openen.', 'ssil'));
     }
 
-    // Close the output stream to finish writing
+    // CSV header
+    fputcsv($output, ['keyword', 'url', 'nofollow', 'target_blank', 'priority']);
+
+    foreach ($links as $keyword => $info) {
+        $url = is_array($info) ? ($info['url'] ?? '') : $info;
+        // Indien URL relatief is, omzetten naar volledig
+        if (str_starts_with($url, '/')) {
+            $url = get_site_url() . $url;
+        }
+        $nofollow     = is_array($info) && !empty($info['nofollow']) ? '1' : '0';
+        $target_blank = is_array($info) && !empty($info['target_blank']) ? '1' : '0';
+        $priority     = is_array($info) ? (int)($info['priority'] ?? 0) : 0;
+
+        fputcsv($output, [$keyword, $url, $nofollow, $target_blank, $priority]);
+    }
+
     fclose($output);
     exit;
 }

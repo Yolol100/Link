@@ -1,25 +1,50 @@
 <?php
-if (!defined('ABSPATH')) exit;
+declare(strict_types=1);
+
+namespace Webactueel\SSIL;
+
+defined('ABSPATH') || exit;
 
 require_once SSIL_PATH . 'includes/ssil-import.php';
 require_once SSIL_PATH . 'includes/ssil-export.php';
 
-function ssil_bulk_page() {
-    // === Feedback alerts (optioneel, deze kun je vervangen door JS toasts als je wilt) ===
+/**
+ * Render de bulk import/export pagina.
+ *
+ * @return void
+ */
+function bulk_page(): void
+{
+    // Feedback alerts (optioneel: vervangen door JS toasts)
     if (isset($_GET['ssil_bulk_success'])) {
         echo '<div class="yoast-alert-success yoast-mb-4"><p>Bulk actie succesvol uitgevoerd.</p></div>';
     } elseif (isset($_GET['ssil_bulk_error'])) {
         echo '<div class="yoast-alert-error yoast-mb-4"><p>Bulk actie mislukt, controleer je bestand.</p></div>';
     }
 
-    // === Import verwerking ===
-    if (isset($_POST['ssil_import']) && isset($_FILES['csv_file']['tmp_name']) && check_admin_referer('ssil_bulk_import', 'ssil_bulk_import_nonce')) {
-        ssil_handle_import($_FILES['csv_file']['tmp_name']);
+    // Import verwerking
+    if (
+        isset($_POST['ssil_import'], $_FILES['csv_file']['tmp_name'])
+        && check_admin_referer('ssil_bulk_import', 'ssil_bulk_import_nonce')
+    ) {
+        // Veiligheid: Alleen doorgaan als importfunctie beschikbaar is
+        if (function_exists(__NAMESPACE__ . '\\handle_import')) {
+            handle_import($_FILES['csv_file']['tmp_name']);
+        } elseif (function_exists('ssil_handle_import')) {
+            ssil_handle_import($_FILES['csv_file']['tmp_name']);
+        }
     }
 
-    // === Export verwerking ===
-    if (isset($_POST['ssil_export']) && check_admin_referer('ssil_bulk_export', 'ssil_bulk_export_nonce')) {
-        ssil_handle_export();
+    // Export verwerking
+    if (
+        isset($_POST['ssil_export'])
+        && check_admin_referer('ssil_bulk_export', 'ssil_bulk_export_nonce')
+    ) {
+        if (function_exists(__NAMESPACE__ . '\\handle_export')) {
+            handle_export();
+        } elseif (function_exists('ssil_handle_export')) {
+            ssil_handle_export();
+        }
     }
     ?>
     <div class="yoast-card yoast-p-4">
@@ -52,4 +77,3 @@ function ssil_bulk_page() {
     </div>
     <?php
 }
-?>

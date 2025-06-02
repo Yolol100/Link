@@ -1,55 +1,60 @@
 <?php
-if (!defined('ABSPATH')) exit;
+declare(strict_types=1);
 
-function ssil_handle_import($filename) {
-    // Check if the file exists and is readable
+namespace Webactueel\SSIL;
+
+defined('ABSPATH') || exit;
+
+/**
+ * Importeert keyword-URL mappings uit een CSV-bestand.
+ *
+ * @param string $filename Pad naar het CSV-bestand.
+ * @return void
+ */
+function handle_import(string $filename): void
+{
+    // Controleer of het bestand bestaat en leesbaar is
     if (!file_exists($filename) || !is_readable($filename)) {
-        wp_redirect(admin_url('admin.php?page=ssil_bulk&ssil_bulk_error=1'));
+        wp_safe_redirect(admin_url('admin.php?page=ssil_bulk&ssil_bulk_error=1'));
         exit;
     }
 
-    // Read all rows from the CSV file
-    $rows = array_map('str_getcsv', file($filename));
+    $rows = array_map('str_getcsv', file($filename) ?: []);
 
-    // Get the current links stored in the WordPress database
+    // Haal huidige links uit de database
     $links = get_option('ssil_links', []);
+    if (!is_array($links)) {
+        $links = [];
+    }
 
-    // Skip the header row (the first row in the CSV)
+    // Sla de header (eerste rij) over
     $header = array_shift($rows);
 
-    // Loop through each row and process the data
     foreach ($rows as $row) {
-        // Ensure the row has at least 5 columns: keyword, url, nofollow, target_blank, priority
+        // Zorg voor minimaal 5 kolommen
         if (count($row) < 5) {
-            continue;  // Skip rows with insufficient data
+            continue;
         }
 
-        // Extract and sanitize the data from the row
-        $word = isset($row[0]) ? trim($row[0]) : '';  // First column: keyword
-        $url  = isset($row[1]) ? trim($row[1]) : '';  // Second column: URL
-        $nofollow = !empty($row[2]) && strtolower($row[2]) === '1'; // Third column: nofollow
-        $target_blank = !empty($row[3]) && strtolower($row[3]) === '1'; // Fourth column: target_blank
-        $priority = isset($row[4]) ? (int)$row[4] : 0;  // Fifth column: priority
+        $word        = isset($row[0]) ? trim($row[0]) : '';
+        $url         = isset($row[1]) ? trim($row[1]) : '';
+        $nofollow    = !empty($row[2]) && strtolower((string)$row[2]) === '1';
+        $target_blank= !empty($row[3]) && strtolower((string)$row[3]) === '1';
+        $priority    = isset($row[4]) ? (int)$row[4] : 0;
 
-        // Only proceed if we have both a keyword and URL
         if ($word && $url) {
-            // Sanitize the URL to prevent XSS or invalid URLs
             $url = esc_url_raw($url);
-
-            // Add the link to the existing links array
             $links[$word] = [
-                'url' => $url,
-                'nofollow' => $nofollow,
-                'target_blank' => $target_blank,
-                'priority' => $priority
+                'url'         => $url,
+                'nofollow'    => $nofollow,
+                'target_blank'=> $target_blank,
+                'priority'    => $priority,
             ];
         }
     }
 
-    // Update the links in the WordPress database
     update_option('ssil_links', $links);
 
-    // Redirect back to the bulk page with success message
-    wp_redirect(admin_url('admin.php?page=ssil_bulk&ssil_bulk_success=1'));
+    wp_safe_redirect(admin_url('admin.php?page=ssil_bulk&ssil_bulk_success=1'));
     exit;
 }
