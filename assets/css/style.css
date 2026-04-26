@@ -615,3 +615,13 @@ textarea.yoast-input:focus {
 .ssil-row-edit:hover td {
   background: #f8f3f8 !important;
 }
+/* Compacte spacing voor Linklocaties-checkboxes op de instellingenpagina. */
+.ssil-linklocaties-options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.ssil-linklocaties-options .yoast-checkbox-label {
+  margin: 0 !important;
+  line-height: 1.25;
+}

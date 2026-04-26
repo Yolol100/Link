@@ -68,14 +68,16 @@ defined('ABSPATH') || exit;
             <tr>
                 <th class="yoast-font-bold yoast-label" scope="row">Linklocaties</th>
                 <td>
-                    <label class="yoast-checkbox-label yoast-mr-2"><input type="checkbox" class="yoast-checkbox" name="ssil_exclude_headings" value="1" <?php checked(!empty($settings['exclude_headings'])); ?> /> Geen headings linken</label><br>
-                    <label class="yoast-checkbox-label yoast-mr-2"><input type="checkbox" class="yoast-checkbox" name="ssil_exclude_quotes" value="1" <?php checked(!empty($settings['exclude_quotes'])); ?> /> Geen quotes linken</label><br>
-                    <label class="yoast-checkbox-label yoast-mr-2"><input type="checkbox" class="yoast-checkbox" name="ssil_exclude_lists" value="1" <?php checked(!empty($settings['exclude_lists'])); ?> /> Geen lijsten linken</label><br>
-                    <label class="yoast-checkbox-label yoast-mr-2"><input type="checkbox" class="yoast-checkbox" name="ssil_link_titles" value="1" <?php checked(!empty($settings['link_titles'])); ?> /> Ook titels linken</label><br>
-                    <label class="yoast-checkbox-label yoast-mr-2"><input type="checkbox" class="yoast-checkbox" name="ssil_link_widgets" value="1" <?php checked(!empty($settings['link_widgets'])); ?> /> Ook widgets linken</label><br>
-                    <label class="yoast-checkbox-label yoast-mr-2"><input type="checkbox" class="yoast-checkbox" name="ssil_link_woocommerce" value="1" <?php checked(!empty($settings['link_woocommerce'])); ?> /> WooCommerce-beschrijvingen linken</label><br>
-                    <label class="yoast-checkbox-label yoast-mr-2"><input type="checkbox" class="yoast-checkbox" name="ssil_link_acf" value="1" <?php checked(!empty($settings['link_acf'])); ?> /> ACF-velden linken</label><br>
-                    <label class="yoast-checkbox-label yoast-mr-2"><input type="checkbox" class="yoast-checkbox" name="ssil_link_elementor" value="1" <?php checked(!empty($settings['link_elementor'])); ?> /> Elementor widget-output linken</label>
+                    <div class="ssil-linklocaties-options">
+                        <label class="yoast-checkbox-label"><input type="checkbox" class="yoast-checkbox" name="ssil_exclude_headings" value="1" <?php checked(!empty($settings['exclude_headings'])); ?> /> Geen headings linken</label>
+                        <label class="yoast-checkbox-label"><input type="checkbox" class="yoast-checkbox" name="ssil_exclude_quotes" value="1" <?php checked(!empty($settings['exclude_quotes'])); ?> /> Geen quotes linken</label>
+                        <label class="yoast-checkbox-label"><input type="checkbox" class="yoast-checkbox" name="ssil_exclude_lists" value="1" <?php checked(!empty($settings['exclude_lists'])); ?> /> Geen lijsten linken</label>
+                        <label class="yoast-checkbox-label"><input type="checkbox" class="yoast-checkbox" name="ssil_link_titles" value="1" <?php checked(!empty($settings['link_titles'])); ?> /> Ook titels linken</label>
+                        <label class="yoast-checkbox-label"><input type="checkbox" class="yoast-checkbox" name="ssil_link_widgets" value="1" <?php checked(!empty($settings['link_widgets'])); ?> /> Ook widgets linken</label>
+                        <label class="yoast-checkbox-label"><input type="checkbox" class="yoast-checkbox" name="ssil_link_woocommerce" value="1" <?php checked(!empty($settings['link_woocommerce'])); ?> /> WooCommerce-beschrijvingen linken</label>
+                        <label class="yoast-checkbox-label"><input type="checkbox" class="yoast-checkbox" name="ssil_link_acf" value="1" <?php checked(!empty($settings['link_acf'])); ?> /> ACF-velden linken</label>
+                        <label class="yoast-checkbox-label"><input type="checkbox" class="yoast-checkbox" name="ssil_link_elementor" value="1" <?php checked(!empty($settings['link_elementor'])); ?> /> Elementor widget-output linken</label>
+                    </div>
                 </td>
             </tr>
             <tr>
