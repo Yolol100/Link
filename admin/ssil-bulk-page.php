@@ -15,7 +15,7 @@ function bulk_page(): void
         handle_import($file);
     }
 
-    $success = isset($_GET['ssil_bulk_success']) ? absint($_GET['ssil_bulk_success']) : 0;
+    $success = isset($_GET['ssil_bulk_success']) ? absint(wp_unslash($_GET['ssil_bulk_success'])) : 0;
     $error = isset($_GET['ssil_bulk_error']) ? sanitize_key((string) wp_unslash($_GET['ssil_bulk_error'])) : '';
     ?>
     <div class="yoast-card yoast-p-4">
