@@ -11,7 +11,7 @@ function get_report_stats(): array
     $links = get_links();
     $settings = get_settings();
     $post_types = !empty($settings['post_types']) ? $settings['post_types'] : ['post', 'page'];
-    $paged = isset($_GET['ssil_report_page']) ? max(1, absint($_GET['ssil_report_page'])) : 1;
+    $paged = isset($_GET['ssil_report_page']) ? max(1, absint(wp_unslash($_GET['ssil_report_page']))) : 1;
     $per_page = 100;
 
     $query = new \WP_Query([
