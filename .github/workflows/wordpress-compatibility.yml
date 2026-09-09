@@ -112,7 +112,16 @@ jobs:
         run: |
           set -euo pipefail
           log=/tmp/ssil-runtime/wp-content/debug.log
-          if [[ -f "$log" ]] && grep -Eqi 'PHP (Fatal error|Parse error|Warning|Deprecated|Notice)' "$log"; then
-            cat "$log"
+          if [[ ! -f "$log" ]]; then
+            exit 0
+          fi
+
+          # WordPress 7.1 + WooCommerce 11.1 emits one known WooCommerce-owned
+          # translation timing notice during WP-CLI plugin activation. Ignore
+          # only that exact third-party notice; all other PHP errors still fail.
+          filtered=/tmp/ssil-debug-filtered.log
+          grep -Ev '_load_textdomain_just_in_time.*woocommerce.*triggered too early' "$log" > "$filtered" || true
+          if grep -Eqi 'PHP (Fatal error|Parse error|Warning|Deprecated|Notice)' "$filtered"; then
+            cat "$filtered"
             exit 1
           fi
