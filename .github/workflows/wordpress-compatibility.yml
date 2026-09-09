@@ -34,11 +34,11 @@ jobs:
       matrix:
         include:
           - label: WordPress 6.0 / PHP 8.0
-            wordpress: 6.0
+            wordpress: '6.0'
             php: '8.0'
             ecosystem: '0'
           - label: WordPress 7.1 / PHP 8.3 / WooCommerce 11.1 / ACF 6.8.9
-            wordpress: 7.1
+            wordpress: '7.1'
             php: '8.3'
             ecosystem: '1'
 
@@ -65,21 +65,22 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          curl --fail --location --silent --show-error --output wp-cli.phar \
+          curl --fail --location --silent --show-error --output /tmp/wp-cli.phar \
             https://github.com/wp-cli/wp-cli/releases/download/v2.12.0/wp-cli-2.12.0.phar
-          echo 'ce34ddd838f7351d6759068d09793f26755463b4a4610a5a5c0a97b68220d85c  wp-cli.phar' | sha256sum --check --strict
+          echo 'ce34ddd838f7351d6759068d09793f26755463b4a4610a5a5c0a97b68220d85c  /tmp/wp-cli.phar' | sha256sum --check --strict
 
       - name: Create clean WordPress runtime
         shell: bash
         run: |
           set -euo pipefail
           runtime=/tmp/ssil-runtime
+          plugin_dir="$runtime/wp-content/plugins/super-simple-internal-links"
           rm -rf "$runtime"
-          php wp-cli.phar core download --path="$runtime" --version='${{ matrix.wordpress }}' --locale=en_US --force
-          php wp-cli.phar config create --path="$runtime" --dbname=wordpress --dbuser=root --dbpass=root --dbhost=127.0.0.1:3306
-          php wp-cli.phar config set WP_DEBUG true --raw --path="$runtime"
-          php wp-cli.phar config set WP_DEBUG_LOG true --raw --path="$runtime"
-          php wp-cli.phar core install \
+          php /tmp/wp-cli.phar core download --path="$runtime" --version='${{ matrix.wordpress }}' --locale=en_US --force
+          php /tmp/wp-cli.phar config create --path="$runtime" --dbname=wordpress --dbuser=root --dbpass=root --dbhost=127.0.0.1:3306
+          php /tmp/wp-cli.phar config set WP_DEBUG true --raw --path="$runtime"
+          php /tmp/wp-cli.phar config set WP_DEBUG_LOG true --raw --path="$runtime"
+          php /tmp/wp-cli.phar core install \
             --path="$runtime" \
             --url=http://ssil.test \
             --title='SSIL Runtime' \
@@ -88,21 +89,22 @@ jobs:
             --admin_email=runtime@example.invalid \
             --skip-email
           if [[ '${{ matrix.ecosystem }}' == '1' ]]; then
-            php wp-cli.phar plugin install advanced-custom-fields --path="$runtime" --version=6.8.9 --activate
-            php wp-cli.phar plugin install woocommerce --path="$runtime" --version=11.1.0 --activate
+            php /tmp/wp-cli.phar plugin install advanced-custom-fields --path="$runtime" --version=6.8.9 --activate
+            php /tmp/wp-cli.phar plugin install woocommerce --path="$runtime" --version=11.1.0 --activate
           fi
+          mkdir -p "$plugin_dir"
+          rsync -a --exclude='.git/' "$GITHUB_WORKSPACE/" "$plugin_dir/"
           rm -f "$runtime/wp-content/debug.log"
-          ln -s "$GITHUB_WORKSPACE" "$runtime/wp-content/plugins/super-simple-internal-links"
-          php wp-cli.phar plugin activate super-simple-internal-links --path="$runtime"
-          php wp-cli.phar plugin status super-simple-internal-links --path="$runtime"
-          php wp-cli.phar eval 'do_action("init"); echo defined("Webactueel\\SSIL\\TEXT_DOMAIN") || defined("SSIL_VERSION") ? "loaded\n" : "loaded\n";' --path="$runtime"
+          php /tmp/wp-cli.phar plugin activate super-simple-internal-links --path="$runtime"
+          php /tmp/wp-cli.phar plugin status super-simple-internal-links --path="$runtime"
+          php /tmp/wp-cli.phar eval 'echo function_exists("Webactueel\\SSIL\\auto_link_content_filter") ? "loaded\n" : "missing\n";' --path="$runtime"
 
       - name: Verify WooCommerce integration hook
         if: matrix.ecosystem == '1'
         shell: bash
         run: |
           set -euo pipefail
-          php wp-cli.phar eval 'do_action("init"); if (false === has_filter("woocommerce_short_description", "Webactueel\\SSIL\\auto_link_content_filter")) { fwrite(STDERR, "WooCommerce filter missing\n"); exit(1); } echo "woocommerce-hook-ok\n";' --path=/tmp/ssil-runtime
+          php /tmp/wp-cli.phar eval 'if (false === has_filter("woocommerce_short_description", "Webactueel\\SSIL\\auto_link_content_filter")) { fwrite(STDERR, "WooCommerce filter missing\n"); exit(1); } echo "woocommerce-hook-ok\n";' --path=/tmp/ssil-runtime
 
       - name: Reject runtime PHP errors
         if: always()
