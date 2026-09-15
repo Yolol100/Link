@@ -1,70 +1,63 @@
-# Super Simple Internal Links (SSIL)
+# Super Simple Internal Links
 
-**Dé moderne WordPress-plugin voor razendsnel interne links beheren, automatiseren en rapporteren.**
+Super Simple Internal Links (SSIL) is a WordPress plugin for mapping keywords to URLs and automatically adding controlled internal or external links to WordPress content.
 
-[![WordPress Tested](https://img.shields.io/badge/WordPress-6.5%2B-blue?logo=wordpress)](https://wordpress.org)
-[![PHP Version](https://img.shields.io/badge/PHP-7.4%2B-green?logo=php)](https://www.php.net/)
-[![MIT License](https://img.shields.io/github/license/jouw-github/ssil)](LICENSE)
-[![Last Updated](https://img.shields.io/github/last-commit/jouw-github/ssil)](https://github.com/jouw-github/ssil/commits/main)
+The current runtime uses an HTML-aware linker instead of plain string replacement, so existing links and sensitive markup are not blindly rewritten.
 
-## ✨ Features
+## Features
 
-- **Automatisch interne links plaatsen** op basis van door jou ingestelde keywords.
-- Gebruiksvriendelijke **beheerinterface** met Yoast-achtige uitstraling.
-- **Logs, bulk-import/export, rapportages** en slimme suggesties voor keywords.
-- **Direct feedback**: toasts, validatie, spinners en duidelijke foutmeldingen.
-- **Veilig en privacybewust**: geen tracking, geen datalekrisico’s.
-- **Simpel te integreren** in bestaande WordPress-sites.
+- Keyword-to-URL mappings.
+- HTML-aware automatic linking in text nodes.
+- Configurable maximum number of links per page.
+- Optional `nofollow` and `target="_blank"` attributes.
+- CSV import and export.
+- Link reports and logs.
+- Optional WooCommerce, ACF, Elementor, widget and title integrations.
+- Safe fallback behaviour on hosts where the PHP DOM extension is unavailable.
 
-## 🚀 Snel starten
+By default the linker skips existing links, scripts, styles, code blocks and buttons. Additional content such as headings, quotes and lists can be excluded through the plugin settings.
 
-1. **Download of clone deze repository:**
+## Requirements
 
-   ```bash
-   git clone https://github.com/Yolol100/Link.git
-3. **Upload naar `/wp-content/plugins/` en activeer in WordPress.**
-4. Navigeer naar het SSIL-menu in je WordPress admin (via "Instellingen" of eigen menu-item).
-5. Stel je gewenste keywords, post types en opties in. Klaar!
+- WordPress 6.0 or newer.
+- PHP 8.0 or newer.
 
-## 📚 Documentatie
+The current release is `2.1.0`. The plugin metadata and `readme.txt` are the canonical source for the current compatibility matrix.
 
-- **Instellingen**: Configureer maximaal aantal links, uitsluitingen, post types en meer.
-- **Keywords beheren**: Voeg snel nieuwe keywords toe, pas ze aan of verwijder ze.
-- **Suggesties**: Ontvang keyword-suggesties op basis van je content.
-- **Bulk-import/export**: Importeer en exporteer je interne links via CSV.
-- **Rapportage**: Inzicht in gelinkte posts, dode links en link-kwaliteit.
+## Installation
 
-Zie ook de [Wiki](https://github.com/jouw-github/ssil/wiki) voor uitgebreide uitleg.
+1. Upload the plugin folder or ZIP through the WordPress Plugins screen.
+2. Activate **Super Simple Internal Links**.
+3. Open the SSIL administration screen.
+4. Add keyword/URL mappings and configure the linking rules that should apply to the site.
 
-## 💻 Voor ontwikkelaars
+For a manual installation, place the plugin folder under `wp-content/plugins/` and activate it from WordPress.
 
-- **Modulair opgebouwd** (MVC-ish, alle admin views gescheiden).
-- **Custom hooks** beschikbaar voor integraties.
-- **Volledig te stylen** via eigen (S)CSS-classes, alles mobile-first.
-- **Compatible met WordPress 6.5+, PHP 7.4+ & PHP 8.x**.
+## Safe linking model
 
-**Pull requests, issues en feedback zijn welkom!**
+SSIL modifies rendered content conservatively:
 
-## 🛠️ Roadmap & ideeën
+- existing links are not nested or replaced;
+- script, style and code content is skipped;
+- URLs and settings are sanitized before use;
+- privileged admin actions use WordPress capability and nonce checks;
+- CSV import/export includes validation and spreadsheet-injection protection.
 
-- [ ] AI-powered keywordsuggesties (optioneel via API)
-- [ ] Meertaligheid (WPML/Polylang support)
-- [ ] Meer rapportage/exports (PDF, Excel)
-- [ ] Gutenberg-blokken voor linkbeheer
+Review automatic-linking settings on staging before applying broad rules to an established content library.
 
-## 👤 Auteurs & licentie
+## Privacy and stored data
 
-**Aangemaakt door [Yolol](https://github.com/Yolol100)  
-Copyright © 2025**
+The plugin stores keyword/URL mappings, settings and removal-log information in the WordPress database. It does not send site data to an external service by default.
 
-MIT License – [Zie LICENSE file](LICENSE)
+Plugin data is removed on uninstall only when **Verwijder plugindata bij uninstall** is explicitly enabled.
 
-## 🤝 Bijdragen
+## Repository structure
 
-- Fork, feature branches, duidelijke PR’s en korte motivatie zijn welkom.
-- Gebruik bij voorkeur Engels voor code en issues, Nederlands voor UI/UX mag.
+- `super-simple-internal-links.php` — plugin bootstrap and metadata.
+- `includes/` — linking, settings, logging and admin actions.
+- `languages/` — translation files.
+- `readme.txt` — WordPress distribution documentation and changelog.
 
-## 🙌 Bedankt voor het gebruiken & bijdragen!
+## License
 
-Vragen of suggesties? Open een issue of mail naar `info@andrewbaeten.nl`.  
-Vind je het nuttig? Geef een ⭐ op GitHub!
+GPL-2.0-or-later, as declared by the plugin metadata and `readme.txt`.
