@@ -2,7 +2,7 @@
 
 > **Supporting portfolio project · WordPress/PHP · internal linking · SEO workflow · CSV import/export**
 
-**Built by:** [Andrew Baeten](https://github.com/Yolol100) · [Portfolio cases](https://andrewbaeten.nl/category/cases)
+**Developer profile:** [Andrew Baeten](https://github.com/Yolol100) · [Portfolio cases](https://andrewbaeten.nl/category/cases)
 
 Super Simple Internal Links (SSIL) is a WordPress plugin for mapping keywords to URLs and automatically adding controlled internal or external links to WordPress content.
 
