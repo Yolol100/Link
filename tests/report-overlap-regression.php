@@ -32,4 +32,37 @@ foreach ($fixtures as $index => [$keywords, $expected]) {
     }
 }
 
+// Pin old and new behavior, including stable sparse indexes, against a
+// deterministic varied corpus. The legacy reference handles only test strings.
+$legacy = static function (array $keywords): array {
+    $pairs = [];
+    foreach ($keywords as $a) {
+        foreach ($keywords as $b) {
+            if ($a !== $b && $a !== '' && $b !== '' && mb_stripos((string) $a, (string) $b) !== false) {
+                $pairs[] = [(string) $a, (string) $b];
+            }
+        }
+    }
+    return array_map('unserialize', array_unique(array_map('serialize', $pairs)));
+};
+
+mt_srand(177);
+$characters = 'abcABC01:_';
+for ($case = 0; $case < 1000; $case++) {
+    $keywords = [];
+    $length = mt_rand(1, 12);
+    for ($index = 0; $index < $length; $index++) {
+        $keyword = '';
+        $size = mt_rand(0, 5);
+        for ($character = 0; $character < $size; $character++) {
+            $keyword .= $characters[mt_rand(0, strlen($characters) - 1)];
+        }
+        $keywords[] = $keyword;
+    }
+    if (\\Webactueel\\SSIL\\find_overlapping_keywords($keywords) !== $legacy($keywords)) {
+        fwrite(STDERR, "Keyword overlap parity failed at corpus case {$case}.\\n");
+        exit(1);
+    }
+}
+
 echo "Keyword overlap behavior: OK\n";
