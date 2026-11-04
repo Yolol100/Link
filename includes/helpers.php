@@ -228,8 +228,11 @@ function require_manage_options(): void
 function csv_safe_cell($value): string
 {
     $value = (string) $value;
-    if ($value !== '' && preg_match('/^[=+\-@]/', $value)) {
+
+    // Include leading whitespace, controls and full-width formula operators.
+    if ($value !== '' && preg_match('/^(?:[\'\s]*[=+\-@\x{FF0B}\x{FF0D}\x{FF1D}\x{FF20}]|[\' ]*[\t\r\n])/u', $value)) {
         return "'" . $value;
     }
+
     return $value;
 }
