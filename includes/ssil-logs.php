@@ -29,7 +29,7 @@ function add_log(string $keyword, string $url, ?int $page_id = null, string $pag
 }
 
 /**
- * Sla een logregel op in de logs-tabel (alias/future-proof).
+ * Compatibiliteitsalias voor bestaande logaanroepen.
  *
  * @param string   $keyword
  * @param string   $url
@@ -39,16 +39,7 @@ function add_log(string $keyword, string $url, ?int $page_id = null, string $pag
  */
 function save_log(string $keyword, string $url, ?int $page_id, string $page_title): void
 {
-    global $wpdb;
-    $table = $wpdb->prefix . 'ssil_logs';
-
-    $wpdb->insert($table, [
-        'keyword'    => $keyword,
-        'url'        => $url,
-        'page_id'    => $page_id,
-        'page_title' => $page_title,
-        'deleted_at' => current_time('mysql')
-    ]);
+    add_log($keyword, $url, $page_id, $page_title);
 }
 
 /**
