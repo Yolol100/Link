@@ -59,8 +59,8 @@ for ($case = 0; $case < 1000; $case++) {
         }
         $keywords[] = $keyword;
     }
-    if (\\Webactueel\\SSIL\\find_overlapping_keywords($keywords) !== $legacy($keywords)) {
-        fwrite(STDERR, "Keyword overlap parity failed at corpus case {$case}.\\n");
+    if (\Webactueel\SSIL\find_overlapping_keywords($keywords) !== $legacy($keywords)) {
+        fwrite(STDERR, "Keyword overlap parity failed at corpus case {$case}.\n");
         exit(1);
     }
 }
