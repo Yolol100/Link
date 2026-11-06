@@ -116,7 +116,17 @@ function find_overlapping_keywords(array $keywords): array
             }
         }
     }
-    return array_map('unserialize', array_unique(array_map('serialize', $pairs)));
+    $unique_pairs = [];
+    $seen = [];
+    foreach ($pairs as $index => $pair) {
+        $key = strlen($pair[0]) . ':' . $pair[0] . strlen($pair[1]) . ':' . $pair[1];
+        if (isset($seen[$key])) {
+            continue;
+        }
+        $seen[$key] = true;
+        $unique_pairs[$index] = $pair;
+    }
+    return $unique_pairs;
 }
 
 function check_url_alive(string $url): bool
