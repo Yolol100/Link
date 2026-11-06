@@ -99,6 +99,12 @@ jobs:
           php /tmp/wp-cli.phar plugin status super-simple-internal-links --path="$runtime"
           php /tmp/wp-cli.phar eval 'echo function_exists("Webactueel\\SSIL\\auto_link_content_filter") ? "loaded\n" : "missing\n";' --path="$runtime"
 
+      - name: Verify CSV export escaping and log aliases
+        shell: bash
+        run: |
+          set -euo pipefail
+          php /tmp/wp-cli.phar eval-file /tmp/ssil-runtime/wp-content/plugins/super-simple-internal-links/tests/csv-log-regression.php --path=/tmp/ssil-runtime
+
       - name: Verify WooCommerce integration hook
         if: matrix.ecosystem == '1'
         shell: bash
