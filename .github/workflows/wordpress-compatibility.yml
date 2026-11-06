@@ -61,6 +61,10 @@ jobs:
           set -euo pipefail
           find . -type f -name '*.php' -not -path './.git/*' -print0 | xargs -0 -n1 php -l
 
+      - name: Keyword report overlap and deduplication regression
+        shell: bash
+        run: php tests/report-overlap-regression.php
+
       - name: Install verified WP-CLI 2.12.0
         shell: bash
         run: |
